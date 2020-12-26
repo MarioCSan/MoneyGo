@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace MoneyGo.Controllers
 {
@@ -27,9 +28,22 @@ namespace MoneyGo.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Login(String usuario, String password)
+        {
+          if (password.Length < 8)
+            {
+                return View("La contraseña es demasiado corta");
+            } else
+            {
+               // Encriptar la contraseña y consultar en el servidor
+            }
+            return View();
+        }
 
         public IActionResult Register()
         {
+
             return View();
         }
 
