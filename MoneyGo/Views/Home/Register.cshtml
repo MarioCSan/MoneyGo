@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Register Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Iniciar sesión</h1>
+    <p>Si no dispone de una cuenta de usuario puede crear una @Html.ActionLink("aquí", "", "").</p>
+    <div>
+        <form method="post" class="loginForm">
+            <label>Nombre de usuario</label><br />
+            <input type="text" class="form-control-sm" />
+            <br />
+            <label>Email</label><br />
+            <input type="email" class="form-control-sm" />
+            <br />
+            <label>Contraseña</label><br />
+            <input type="password" class="form-control-sm" />
+            <br />
+            <label>Contraseña</label><br />
+            <input type="password" class="form-control-sm" />
+            <br />
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </form>
+    </div>
+</div>
