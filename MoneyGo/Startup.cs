@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace MoneyGo
 {
     public class Startup
     {
+        IConfiguration configuration;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,6 +26,9 @@ namespace MoneyGo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            String database = configuration.GetConnectionString("database");
+
+            services.AddTransient<IRepositoryTransacciones, RepositoryTransacciones>();
             services.AddControllersWithViews();
         }
 
