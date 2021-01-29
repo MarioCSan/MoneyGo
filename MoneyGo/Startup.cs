@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using MoneyGo.Data;
+using MoneyGo.Helpers;
 using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
@@ -18,18 +21,25 @@ namespace MoneyGo
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             String database = configuration.GetConnectionString("database");
 
+            services.AddSingleton<IConfiguration>(this.configuration);
+            services.AddSingleton<MailService>();
+            //services.AddSingleton<UploadService>();
+
+            services.AddSingleton<PathProvider>();
+
+
             services.AddTransient<IRepositoryTransacciones, RepositoryTransacciones>();
             services.AddControllersWithViews();
+
+            services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +60,7 @@ namespace MoneyGo
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

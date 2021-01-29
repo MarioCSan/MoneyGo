@@ -11,7 +11,7 @@ namespace MoneyGo.Models
     public class Transacciones
     {
         [Key]
-        [Column("IDTRANSACCIONE")]
+        [Column("IDTRANSACCION")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdTransaccion { get; set; }
 
@@ -20,9 +20,8 @@ namespace MoneyGo.Models
 
 
         [Column("CANTIDAD")]
-        public int Cantidad { get; set; }
-        //MAPEAR A FLOAT
-
+        public float Cantidad { get; set; }
+      
         [Column("TIPOTRANSACCION")]
         public String TipoTransaccion { get; set; }
 

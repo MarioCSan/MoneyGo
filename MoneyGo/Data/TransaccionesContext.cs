@@ -9,8 +9,11 @@ namespace MoneyGo.Data
 {
     public class TransaccionesContext: DbContext
     {
-        public TransaccionesContext(DbContextOptions<TransaccionesContext> options) : base(options) { }
+        public TransaccionesContext(DbContextOptions<TransaccionesContext> options) : base(options)
+        {
 
-        public DbSet<Transacciones> transacciones { get; set; }
+        }
+        public DbSet<Transacciones> Transacciones { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
