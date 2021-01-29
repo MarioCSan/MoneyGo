@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Models;
 using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,18 @@ namespace MoneyGo.Controllers
         [HttpPost]
         public IActionResult LogIn(String email, String password)
         {
-            return View();
+            Usuario user = this.repo.ValidarUsuario(email, password);
+            if (user == null)
+            {
+                ViewData["MENSAJE"] = "usuario/password no validos";
+                return View();
+            }
+            else
+            {
+                ViewData["MENSAJE"] = "Credenciales correctas, " + user.Nombre;
+                return RedirectToAction("Index", "Transacciones");
+            }
+           
         }
 
         public IActionResult Register()

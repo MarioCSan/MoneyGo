@@ -54,5 +54,31 @@ namespace MoneyGo.Repositories
             this.MailService.SendEmailRegistro(email, Nombre);
             
         }
+
+        public Usuario ValidarUsuario(String email, String password)
+        {
+            Usuario user = this.context.Usuarios.Where(z => z.Email == email).FirstOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
+            else
+            {
+                String salt = user.Salt;
+                byte[] passbbdd = user.Password;
+                byte[] passtmp = CypherService.CifrarContenido(password, salt);
+                // comparar array bytes[]
+                bool respuesta =
+                HelperToolkit.CompararArrayBytes(passbbdd, passtmp);
+                if (respuesta == true)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
