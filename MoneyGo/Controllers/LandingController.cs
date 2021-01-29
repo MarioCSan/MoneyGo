@@ -32,7 +32,7 @@ namespace MoneyGo.Controllers
             Usuario user = this.repo.ValidarUsuario(email, password);
             if (user == null)
             {
-                ViewData["MENSAJE"] = "usuario/password no validos";
+                ViewData["MENSAJE"] = "usuario/password no válidos";
                 return View();
             }
             else
