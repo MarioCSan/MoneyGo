@@ -32,14 +32,12 @@ namespace MoneyGo
             services.AddSingleton<IConfiguration>(this.configuration);
             services.AddSingleton<MailService>();
             //services.AddSingleton<UploadService>();
-
             services.AddSingleton<PathProvider>();
 
-
-            services.AddTransient<IRepositoryTransacciones, RepositoryTransacciones>();
-            services.AddControllersWithViews();
-
+            services.AddTransient<RepositoryTransacciones>();
             services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

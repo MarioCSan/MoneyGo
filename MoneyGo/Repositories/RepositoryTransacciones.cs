@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MoneyGo.Repositories
 {
-    public class RepositoryTransacciones : IRepositoryTransacciones
+    public class RepositoryTransacciones
     {
         TransaccionesContext context;
         MailService MailService;
@@ -33,10 +33,14 @@ namespace MoneyGo.Repositories
 
         public void InsertarUsuario(String nombreUsuario, String password, String Nombre, String email)
         {
-            int maxId = 0; //Se necesita sacar el max(id) de la base de datos y sumarle 1;
+           
+            var consulta = from datos in this.context.Usuarios 
+                           select datos.IdUsuario;
+
+            int maxId = consulta.Max();
 
             Usuario user = new Usuario();
-            user.IdUsuario = maxId;
+            user.IdUsuario = maxId+1;
             user.Nombre = Nombre;
             user.NombreUsuario = nombreUsuario;
             user.Email = email;
@@ -47,7 +51,7 @@ namespace MoneyGo.Repositories
             this.context.Usuarios.Add(user);
             this.context.SaveChanges();
 
-            this.MailService.SendEmailRegistro(email);
+            this.MailService.SendEmailRegistro(email, Nombre);
             
         }
     }

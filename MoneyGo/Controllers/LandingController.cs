@@ -15,16 +15,12 @@ namespace MoneyGo.Controllers
         {
             this.repo = repo;
         }
+
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Index(String email, String password)
-        {
-            return View();
-        }
-
+      
         public IActionResult LogIn()
         {
             return View();
@@ -43,7 +39,8 @@ namespace MoneyGo.Controllers
         public IActionResult Register(String nombre, String nombreUsuario, String password, String email)
         {
             this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-            return RedirectToAction("Index");
+            ViewData["MENSAJE"] = "Revise la bandeja de entrada de su email";
+            return View();
         }
     }
 }

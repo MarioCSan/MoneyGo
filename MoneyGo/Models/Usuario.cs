@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace MoneyGo.Models
 {
-    [Table("Usurios")]
+    [Table("USUARIOS")]
     public class Usuario
     {
         [Key]
         [Column("IDUSUARIO")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdUsuario{ get; set; }
 
         [Column("NOMBRE")]

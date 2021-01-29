@@ -1,11 +1,14 @@
-﻿
+﻿@if(@ViewData["MENSAJE"] != null)
+{
+    <h3>@ViewData["MENSAJE"]</h3>
+}
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-signin">
+                    <form class="form-signin" method="post">
 
                         <div class="form-label-group">
                             <input type="text" id="inputName" class="form-control" name="nombre" placeholder="Nombre" required autofocus>
@@ -32,7 +35,7 @@
                             <label class="custom-control-label" for="customCheck1">Acepto los <a asp-action="Terminos" asp-controller="Legal">Terminos y condiciones</a></label>
                         </div>
 
-                        <a asp-action="Register" asp-controller="Landing" class="btn btn-lg btn-primary btn-block text-uppercase">Registrarse</a>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase">Registrarse</button>
                         <hr class="my-4">
                         <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                         <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>

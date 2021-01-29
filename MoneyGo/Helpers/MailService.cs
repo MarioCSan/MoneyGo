@@ -54,7 +54,7 @@ namespace MoneyGo.Helpers
             smtpClient.Send(mail);
         }
 
-        public void SendEmailRegistro(String receptor)
+        public void SendEmailRegistro(String receptor, String nombre)
         {
             MailMessage mail = new MailMessage();
             //UploadService archivo = new UploadService(this.pathProvider, this.configuration);
@@ -62,7 +62,7 @@ namespace MoneyGo.Helpers
             String usermail = this.configuration["usuariomail"];
             String passwordmail = this.configuration["passwordmail"];
 
-            String mensaje = "Gracias por registrarse en MoneyGo. Ya puede empezar a uilizar la aplicacion.";
+            String mensaje = "Hola, " + nombre + ". Gracias por registrarse en MoneyGo. Ya puede empezar a uilizar la aplicacion.";
 
             mail.From = new MailAddress(usermail);
             mail.To.Add(new MailAddress(receptor));
