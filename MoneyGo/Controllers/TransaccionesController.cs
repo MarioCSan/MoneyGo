@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace MoneyGo.Controllers
 {
     public class TransaccionesController : Controller
     {
+        RepositoryTransacciones repo;
+        public TransaccionesController(RepositoryTransacciones repo)
+        {
+            this.repo = repo;
+        }
         public IActionResult Index()
         {
             return View();
