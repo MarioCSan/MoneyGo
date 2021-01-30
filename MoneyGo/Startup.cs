@@ -56,6 +56,9 @@ namespace MoneyGo
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //Session
+            //app.UseSession();
+            
             app.UseRouting();
 
             app.UseStaticFiles();

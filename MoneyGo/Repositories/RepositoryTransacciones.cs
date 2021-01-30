@@ -32,10 +32,10 @@ namespace MoneyGo.Repositories
             return consulta.ToList();
         }
 
-        public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, DateTime Fecha)
+        public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, String Concepto, DateTime Fecha)
         {
             var consulta = from datos in this.context.Transacciones
-                           select datos.IdUsuario;
+                           select datos.IdTransaccion;
 
 
             int maxId = consulta.Max();
@@ -43,9 +43,12 @@ namespace MoneyGo.Repositories
             Transacciones trnsc = new Transacciones();
             trnsc.IdTransaccion = maxId + 1;
             trnsc.IdUsuario = IdUsuario;
+            trnsc.Cantidad = Cantidad;
             trnsc.TipoTransaccion = Tipo;
+            trnsc.Concepto = Concepto;
             trnsc.FechaTransaccion = Fecha;
-
+            this.context.Add(trnsc);
+            this.context.SaveChanges();
 
         }
 

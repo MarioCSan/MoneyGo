@@ -15,7 +15,7 @@ namespace MoneyGo.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdTransaccion { get; set; }
 
-        [ForeignKey("IdUsuario")]
+        [ForeignKey("IDUSUARIO")]
         [Column("IDUSUARIO")]
         public int IdUsuario { get; set; }
 

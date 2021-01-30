@@ -17,24 +17,25 @@ namespace MoneyGo.Controllers
         }
         public IActionResult Index(int IdUsuario, String nombre)
         {
-            ViewData["USUARIO"] = nombre;
+            ViewData["USUARIO"] = IdUsuario;
             List<Transacciones> transacciones = this.repo.GetTransacciones(IdUsuario);
 
             return View(transacciones);
         }
 
-        public IActionResult NuevaTransaccion()
+        public IActionResult NuevaTransaccion(int id)
         {
+            ViewData["user"] = id;
             return View();
         }
         [HttpPost]
-        public IActionResult NuevaTransaccion(int IdUsuario, float cantidad, String tipoTransaccion)
+        public IActionResult NuevaTransaccion(int IdUsuario, float cantidad, String tipoTransaccion, String Concepto)
         {
             String date = DateTime.Now.ToShortDateString();
             DateTime fecha = Convert.ToDateTime(date);
 
-            this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, fecha);
-            return View();
+            this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
+            return RedirectToAction("Index", new { IdUsuario = IdUsuario});
         }
     }
 }

@@ -6,7 +6,9 @@
 <h1>Hola mundo, SI ves estio es que has entrado </h1>
 @* Vista principal de la app. ¿Mostrar aquí ya las transacciones o crear un boton para ir? *@
 <h4>Saludos para @ViewData["USUARIO"]</h4>
-<a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-id="@ViewData["USUARIO"]" class="btn btn-danger">Nueva transaccion</a>
+
+@* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
+<a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-danger">Nueva transaccion</a>
 
 @if (Model != null)
 {
@@ -14,22 +16,28 @@
         <thead>
             <tr>
                 <th>
-
+                    Cantidad
                 </th>
                 <th>
-
+                    Tipo de ingreso
                 </th>
                 <th>
-
+                    Concepto
+                </th>
+                <th>
+                    Fecha
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach(Transacciones trns in Model)
             {
-                <tr>
-                    <td>@trns.Cantidad</td>
-                </tr>
+            <tr>
+                <td>@trns.Cantidad</td>
+                <td>@trns.TipoTransaccion</td>
+                <td>@trns.Concepto</td>
+                <td>@trns.FechaTransaccion</td>
+            </tr>
             }
         </tbody>
     </table>
