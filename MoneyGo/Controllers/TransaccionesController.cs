@@ -14,8 +14,9 @@ namespace MoneyGo.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index()
+        public IActionResult Index(String nombre)
         {
+            ViewData["USUARIO"] = nombre;
             return View();
         }
     }
