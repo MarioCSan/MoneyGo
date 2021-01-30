@@ -12,20 +12,24 @@ namespace MoneyGo.Models
     {
         [Key]
         [Column("IDTRANSACCION")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdTransaccion { get; set; }
 
+        [ForeignKey("IdUsuario")]
         [Column("IDUSUARIO")]
         public int IdUsuario { get; set; }
 
 
         [Column("CANTIDAD")]
-        public float Cantidad { get; set; }
+        public Double Cantidad { get; set; }
       
         [Column("TIPOTRANSACCION")]
         public String TipoTransaccion { get; set; }
 
         [Column("FECHATRANSACCION")]
         public DateTime FechaTransaccion { get; set; }
+
+        [Column("CONCEPTO")]
+        public String Concepto{ get; set; }
     }
 }

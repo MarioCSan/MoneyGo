@@ -1,0 +1,49 @@
+﻿@model MoneyGo.Models.Transacciones
+
+@{
+    ViewData["Title"] = "NuevaTransaccion";
+}
+
+<h1>NuevaTransaccion</h1>
+
+<h4>Transacciones</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NuevaTransaccion">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           <div class="form-group">
+                <input asp-for="IdUsuario"  name="IdUsuario" value="" class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input type="number" asp-for="Cantidad"  name="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoTransaccion" class="control-label"></label>
+                <input asp-for="TipoTransaccion"  name="TipoTransaccion" class="form-control" />
+
+                <span asp-validation-for="TipoTransaccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Concepto" class="control-label"></label>
+                <input asp-for="Concepto" name="Concepto" class="form-control" />
+                <span asp-validation-for="Concepto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

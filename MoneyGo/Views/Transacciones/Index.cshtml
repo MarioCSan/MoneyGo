@@ -1,22 +1,36 @@
-﻿@section navigation{ 
+﻿@model List<Transacciones>
+@section navigation{
 
 }
 <h2>Transacciones</h2>
 <h1>Hola mundo, SI ves estio es que has entrado </h1>
 @* Vista principal de la app. ¿Mostrar aquí ya las transacciones o crear un boton para ir? *@
 <h4>Saludos para @ViewData["USUARIO"]</h4>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>
+<a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-id="@ViewData["USUARIO"]" class="btn btn-danger">Nueva transaccion</a>
 
-            </th>
-            <th>
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
 
-            </th>
-            <th>
+                </th>
+                <th>
 
-            </th>
-        </tr>
-    </thead>
-</table>
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Transacciones trns in Model)
+            {
+                <tr>
+                    <td>@trns.Cantidad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

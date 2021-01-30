@@ -38,7 +38,7 @@ namespace MoneyGo.Controllers
             else
             {
                 ViewData["MENSAJE"] = "Credenciales correctas, " + user.Nombre;
-                return RedirectToAction("Index", "Transacciones", new { nombre = user.NombreUsuario});
+                return RedirectToAction("Index", "Transacciones", new { IdUsuario = user.IdUsuario, nombre = user.NombreUsuario});
             }
            
         }
