@@ -38,10 +38,10 @@ namespace MoneyGo.Controllers
             return RedirectToAction("Index", new { IdUsuario = IdUsuario});
         }
 
-        public IActionResult Delete(int iddept)
+        public IActionResult Delete(int idtransaccion)
         {
-            this.repo.EliminarTransaccion(iddept);
-            ViewData["MENSAJE"] = "Transaccion eliminada correctamente";
+            this.repo.EliminarTransaccion(idtransaccion);
+            TempData["MENSAJE"] = "Transaccion eliminada correctamente";
             return RedirectToAction("Index");
         }
     }
