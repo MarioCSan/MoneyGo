@@ -32,6 +32,11 @@ namespace MoneyGo.Repositories
             return consulta.ToList();
         }
 
+        public Transacciones BuscarTransacciones(int IdTransaccion)
+        {
+            return this.context.Transacciones.Where(z=> z.IdTransaccion == IdTransaccion).FirstOrDefault();
+        }
+
         public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, String Concepto, DateTime Fecha)
         {
             var consulta = from datos in this.context.Transacciones
@@ -74,6 +79,14 @@ namespace MoneyGo.Repositories
 
             this.MailService.SendEmailRegistro(email, Nombre);
 
+        }
+
+        public void EliminarTransaccion(int idtransaccion)
+        {
+            //RGPD.¿Se que almacenar los datos X tiempo?¿Necesario campo extra a nulo o booleano para que no se muestre?
+            Transacciones trnsc = this.BuscarTransacciones(idtransaccion);
+            this.context.Transacciones.Remove(trnsc);
+            this.context.SaveChanges();
         }
 
         public Usuario ValidarUsuario(String email, String password)

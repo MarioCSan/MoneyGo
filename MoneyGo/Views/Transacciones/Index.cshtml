@@ -37,6 +37,9 @@
                 <td>@trns.TipoTransaccion</td>
                 <td>@trns.Concepto</td>
                 <td>@trns.FechaTransaccion</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { iddept = trns.IdTransaccion })
+                </td>
             </tr>
             }
         </tbody>
