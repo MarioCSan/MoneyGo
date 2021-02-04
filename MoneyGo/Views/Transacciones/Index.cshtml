@@ -10,6 +10,10 @@
 @* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
 <a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>
 
+@if (ViewData["CADENA"] != null)
+{
+    @ViewData["CADENA"]
+}
 
 @if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null  )
 {
@@ -20,6 +24,12 @@
     </button>
 </div>
 }
+
+<form method="post">
+    <input type="file" name="filename" class="form-control-file" />
+    <button class="btn btn-success">Probar</button>
+</form>
+
 @if (Model != null)
 {
     <table class="table table-bordered">

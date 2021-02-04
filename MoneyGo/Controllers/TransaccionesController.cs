@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Helpers;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
 using System;
@@ -24,6 +25,14 @@ namespace MoneyGo.Controllers
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);
+        }
+        //prueba del sanitizer
+        [HttpPost]
+        public IActionResult Index(String filename) {
+
+            String sanitize = HelperToolkit.Normalize(filename);
+            ViewData["CADENA"] = sanitize;
+            return View();
         }
 
         public IActionResult NuevaTransaccion(int id)
