@@ -42,3 +42,4 @@ namespace MoneyGo.Helpers
             return path;
         }
     }
+}
