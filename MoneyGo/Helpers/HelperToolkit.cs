@@ -31,12 +31,8 @@ namespace MoneyGo.Helpers
         public static String Normalize(String filename)
         {
             String extension = System.IO.Path.GetExtension(filename).Trim('.');
-
-            if (extension != "jpg")
-            {
-                return "La extensión de la imagen no es válida. Los formatos válidos son: .jpg, .png y .gif";
-            }
-            else
+            bool valido = ValidarFormatoImagen(extension);
+            if (valido)
             {
                 string name = System.IO.Path.GetFileNameWithoutExtension(filename);
 
@@ -47,11 +43,31 @@ namespace MoneyGo.Helpers
                     if (!removeChars.Contains(c))
                     {
                         result.Append(c);
-                    } 
+                    }
                 }
 
                 return result.ToString() + '.' + extension;
             }
+            else 
+            {
+                return "La extensión de la imagen no es válida. Los formatos válidos son: .jpg, .png y .gif";
+               
+            }
+        }
+
+        public static bool ValidarFormatoImagen(String extension)
+        {
+            extension = extension.ToUpper();
+            List<String> extensionesValidas = new List<string>{ "JPG", "PNG", "JPEG", "GIF" };
+
+            foreach(String ext in extensionesValidas)
+            {
+                if (extension == ext)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
