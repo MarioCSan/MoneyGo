@@ -104,7 +104,7 @@ namespace MoneyGo.Repositories
                 // comparar array bytes[]
                 bool respuesta =
                 HelperToolkit.CompararArrayBytes(passbbdd, passtmp);
-                if (respuesta == true)
+                if (respuesta)
                 {
                     return user;
                 }
