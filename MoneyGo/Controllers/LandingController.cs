@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,13 @@ namespace MoneyGo.Controllers
             this.repo = repo;
         }
 
+        public object HttpSesion { get; private set; }
+
         public IActionResult Index()
         {
             return View();
         }
-      
+
         public IActionResult LogIn()
         {
             return View();
@@ -37,10 +41,11 @@ namespace MoneyGo.Controllers
             }
             else
             {
-                ViewData["MENSAJE"] = "Credenciales correctas, " + user.Nombre;
-                return RedirectToAction("Index", "Transacciones", new { IdUsuario = user.IdUsuario, nombre = user.NombreUsuario});
+                HttpContext.Session.SetInt32("user", user.IdUsuario);
+                HttpContext.Session.SetString("user", user.Nombre);
+                return RedirectToAction("Index", "Transacciones");
             }
-           
+
         }
 
         public IActionResult Register()

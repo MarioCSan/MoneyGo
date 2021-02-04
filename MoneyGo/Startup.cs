@@ -27,6 +27,11 @@ namespace MoneyGo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(OptionsBuilderConfigurationExtensions =>
+            {
+                OptionsBuilderConfigurationExtensions.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
+
             String database = configuration.GetConnectionString("database");
 
             services.AddSingleton<IConfiguration>(this.configuration);
@@ -57,7 +62,7 @@ namespace MoneyGo
             app.UseStaticFiles();
 
             //Session
-            //app.UseSession();
+            app.UseSession();
             
             app.UseRouting();
 
