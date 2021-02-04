@@ -63,10 +63,10 @@ namespace MoneyGo.Repositories
             var consulta = from datos in this.context.Usuarios
                            select datos.IdUsuario;
 
-            int maxId = consulta.Max();
+            int maxId = consulta.Max() + 1;
 
             Usuario user = new Usuario();
-            user.IdUsuario = maxId + 1;
+            user.IdUsuario = maxId;
             user.Nombre = Nombre;
             user.NombreUsuario = nombreUsuario;
             user.Email = email;
@@ -104,7 +104,7 @@ namespace MoneyGo.Repositories
                 // comparar array bytes[]
                 bool respuesta =
                 HelperToolkit.CompararArrayBytes(passbbdd, passtmp);
-                if (respuesta == true)
+                if (respuesta)
                 {
                     return user;
                 }

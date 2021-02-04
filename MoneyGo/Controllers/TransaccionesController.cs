@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
 using System;
@@ -15,10 +16,12 @@ namespace MoneyGo.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index(int IdUsuario, String nombre)
+        public IActionResult Index()
         {
-            ViewData["USUARIO"] = IdUsuario;
-            List<Transacciones> transacciones = this.repo.GetTransacciones(IdUsuario);
+            int user = (int)HttpContext.Session.GetInt32("user");
+            ViewData["USUARIO"] = HttpContext.Session.GetInt32("user");
+            ViewData["NOMBRE"] = HttpContext.Session.GetString("nombre");
+            List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);
         }
