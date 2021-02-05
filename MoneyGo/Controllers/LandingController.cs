@@ -43,6 +43,14 @@ namespace MoneyGo.Controllers
             {
                 HttpContext.Session.SetInt32("user", user.IdUsuario);
                 HttpContext.Session.SetString("user", user.Nombre);
+                if (user.ImagenUsuario == null)
+                {
+                    HttpContext.Session.SetString("img", "vacio");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("img", user.ImagenUsuario);
+                }
                 return RedirectToAction("Index", "Transacciones");
             }
 
