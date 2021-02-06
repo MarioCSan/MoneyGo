@@ -22,18 +22,25 @@
                     </ul>
                 </div>
                 <div>
-                    @if (session != null)
-                    {
-                        @if (userImg.ToLower() == "vacio")
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (session != null)
                         {
-                            <a asp-action="Control" asp-controller="Managment" class="nav-item">Panel de control</a>
-                            <img src="~/Images/UserLogo.svg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
+                            @if (userImg.ToLower() == "vacio")
+                            {
+                                <li class="nav-item"><a asp-action="Control" asp-controller="Management" class="nav-link">Panel de control</a></li>
+                                <li class="nav-item">
+                                    <img src="~/Images/UserLogo.svg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a asp-action="Control" asp-controller="Management" class="nav-link">Panel de control</a></li>
+                                <li class="nav-item">
+                                    <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
+                                </li>
+                            }
                         }
-                        else
-                        {
-                            <img src="~/Images/@userImg" style="width:5px; height: auto;" alt="Imagen del usuario" />
-                        }
-                    }
+                    </ul>
 
                 </div>
             </div>
