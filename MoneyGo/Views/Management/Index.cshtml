@@ -43,19 +43,19 @@
         <div class="card bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">Cambiar Contraseña</div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" asp-action="ChangePassword">
                     <label>Contraseña antigua</label>
                     <input type="password" name="oldpassword" class="form-control" />
 
                     <label>Nueva contraseña</label>
                     <input type="password" name="newpassword" class="form-control" />
 
-                    <label>REpita la contraseña</label>
+                    <label>Repita la contraseña</label>
                     <input type="password" name="passwordconfirm" class="form-control" />
                     <button type="submit" class="btn btn-outline-primary">Cambiar Contraseña</button>
                 </form>
 
-                <p class="card-text">Puedes introducir cualquier imagen con el formato .jpg, .jpeg, .png y .gif.</p>
+                <p class="card-text">Introduzca una contraseña segura y no la comparta con nadie.</p>
             </div>
         </div>
 
