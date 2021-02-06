@@ -19,6 +19,7 @@ namespace MoneyGo.Repositories
             this.MailService = MailService;
         }
 
+        #region transacciones
         public List<Transacciones> GetTransacciones(int idusuario)
         {
             var consulta = from datos in this.context.Transacciones
@@ -57,6 +58,20 @@ namespace MoneyGo.Repositories
 
         }
 
+        public void EliminarTransaccion(int idtransaccion)
+        {
+            //RGPD.¿Se que almacenar los datos X tiempo?¿Necesario campo extra a nulo o booleano para que no se muestre?
+            Transacciones trnsc = this.BuscarTransacciones(idtransaccion);
+            this.context.Transacciones.Remove(trnsc);
+            this.context.SaveChanges();
+        }
+
+
+        #endregion
+
+        #region usuarios
+
+        //Storedprocedure para el alta de usuario??
         public void InsertarUsuario(String nombreUsuario, String password, String Nombre, String email)
         {
 
@@ -80,15 +95,6 @@ namespace MoneyGo.Repositories
             this.MailService.SendEmailRegistro(email, Nombre);
 
         }
-
-        public void EliminarTransaccion(int idtransaccion)
-        {
-            //RGPD.¿Se que almacenar los datos X tiempo?¿Necesario campo extra a nulo o booleano para que no se muestre?
-            Transacciones trnsc = this.BuscarTransacciones(idtransaccion);
-            this.context.Transacciones.Remove(trnsc);
-            this.context.SaveChanges();
-        }
-
         public Usuario ValidarUsuario(String email, String password)
         {
             Usuario user = this.context.Usuarios.Where(z => z.Email == email).FirstOrDefault();
@@ -114,5 +120,6 @@ namespace MoneyGo.Repositories
                 }
             }
         }
+        #endregion
     }
 }
