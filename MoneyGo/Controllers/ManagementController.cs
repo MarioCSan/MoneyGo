@@ -24,31 +24,50 @@ namespace MoneyGo.Controllers
 
         public IActionResult Index()
         {
-            int id = (int)HttpContext.Session.GetInt32("user");
-            Usuario user = this.repo.getDataUsuario(id);
-            
-            return View(user);
+            if (HttpContext.Session.GetString("user") == null)
+            {
+                return RedirectToAction("Index", "Landing");
+            }
+            else
+            {
+                int id = (int)HttpContext.Session.GetInt32("user");
+                Usuario user = this.repo.getDataUsuario(id);
+
+                return View(user);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(IFormFile imagen)
         {
-            String filename = imagen.FileName;
-            String path = this.PathProvider.MapPath(filename, Folders.Images);
-
-            if (filename != null)
-            {
-                using (var Stream = new FileStream(path, FileMode.Create))
-                {
-                    await imagen.CopyToAsync(Stream);
-                }
-                this.repo.UpdateImagen((int)HttpContext.Session.GetInt32("user"), filename);
-            }
-            ViewData["MSG"] = "Imagen cambiada con exito";
-
             Usuario user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
+            if (imagen != null)
+            {
 
-            return View(user);
+                String filename = imagen.FileName;
+                String path = this.PathProvider.MapPath(filename, Folders.Images);
+
+                if (filename != null)
+                {
+                    using (var Stream = new FileStream(path, FileMode.Create))
+                    {
+                        await imagen.CopyToAsync(Stream);
+                    }
+                    this.repo.UpdateImagen((int)HttpContext.Session.GetInt32("user"), filename);
+                }
+                ViewData["MSG"] = "Imagen cambiada con exito";
+
+
+                HttpContext.Session.SetString("img", user.ImagenUsuario);
+                return View(user);
+            }
+            else
+            {
+                ViewData["MSG"] = "Introduzca una imágen nueva para sustituir la imágen actual";
+
+                return View(user);
+            }
+
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿@model Usuario
 
+
 @if (ViewData["MSG"] != null)
 {
-    <div class="alert alert-dismissible alert-success">
-
+    <div class="alert alert-dismissible alert-success" role="alert">
+        @ViewData["MSG"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 <div class="container">
@@ -11,10 +15,13 @@
         <div class="card bg-light mb-3" style="max-width: 18rem;">
 
             <div class="card-header">
-                <img src="~/Images/@Model.ImagenUsuario" class="card-img-top" />
+                @if (Model.ImagenUsuario != null)
+                {
+                    <img src="~/Images/@Model.ImagenUsuario" class="card-img-top" />
+                }
             </div>
             <div class="card-body">
-               Hola @Model.NombreUsuario
+                Hola @Model.NombreUsuario
             </div>
 
         </div>
@@ -30,7 +37,7 @@
                     <button type="submit" class="btn btn-outline-primary">Cambiar imagen</button>
                 </form>
 
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Puedes introducir cualquier imagen con el formato .jpg, .jpeg, .png y .gif.</p>
             </div>
         </div>
     </div>
