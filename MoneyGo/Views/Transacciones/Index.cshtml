@@ -5,7 +5,6 @@
 <h2>Transacciones</h2>
 <h1>Hola mundo, SI ves estio es que has entrado </h1>
 @* Vista principal de la app. ¿Mostrar aquí ya las transacciones o crear un boton para ir? *@
-<h4>Saludos para @ViewData["USUARIO"]</h4>
 
 @* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
 <a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>

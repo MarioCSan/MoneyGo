@@ -19,6 +19,15 @@ namespace MoneyGo.Repositories
             this.MailService = MailService;
         }
 
+        #region management
+
+        public Usuario getDataUsuario(int id)
+        {
+            return this.context.Usuarios.Where(z => z.IdUsuario == id).FirstOrDefault();
+        }
+
+        #endregion
+
         #region transacciones
         public List<Transacciones> GetTransacciones(int idusuario)
         {
@@ -69,7 +78,7 @@ namespace MoneyGo.Repositories
 
         #endregion
 
-        #region usuarios
+        #region usuariosLogin
 
         //Storedprocedure para el alta de usuario??
         public void InsertarUsuario(String nombreUsuario, String password, String Nombre, String email)
