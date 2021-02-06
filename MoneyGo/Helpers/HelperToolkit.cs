@@ -70,6 +70,5 @@ namespace MoneyGo.Helpers
             }
             return false;
         }
-
     }
 }

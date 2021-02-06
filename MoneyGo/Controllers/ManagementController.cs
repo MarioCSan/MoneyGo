@@ -37,6 +37,34 @@ namespace MoneyGo.Controllers
             }
         }
 
+
+        [HttpPost]
+        
+        public IActionResult Index(String oldpassword, String newpassword, String confirmpassword)
+        {
+            String email = this.repo.GetEmail((int)HttpContext.Session.GetInt32("user"));
+            Usuario user = this.repo.ValidarUsuario(email, oldpassword);
+
+            if (user != null && newpassword.Equals(confirmpassword))
+            {
+                ViewData["MSG"] = "COntraseña cambiada con éxito";
+                this.repo.CambiarPasswrod(user, newpassword);
+
+            } else if(user==null)
+            {
+                user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
+                ViewData["ERR"] = "La contraseña antigua no es correcta";
+                return View(user);
+            } else
+            {
+                user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
+                ViewData["ERR"] = "La contraseñas no coinciden";
+                return View(user);
+            }
+
+            return View(user);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Index(IFormFile imagen)
         {

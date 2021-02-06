@@ -10,6 +10,16 @@
         </button>
     </div>
 }
+
+@if (ViewData["ERR"] != null)
+{
+    <div class="alert alert-dismissible alert-danger" role="alert">
+        @ViewData["ERR"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 <div class="container">
     <div class="row">
         <div class="card bg-light mb-3" style="max-width: 18rem;">
@@ -27,7 +37,28 @@
         </div>
 
     </div>
+
+
     <div class="row">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Cambiar Contraseña</div>
+            <div class="card-body">
+                <form method="post">
+                    <label>Contraseña antigua</label>
+                    <input type="password" name="oldpassword" class="form-control" />
+
+                    <label>Nueva contraseña</label>
+                    <input type="password" name="newpassword" class="form-control" />
+
+                    <label>REpita la contraseña</label>
+                    <input type="password" name="passwordconfirm" class="form-control" />
+                    <button type="submit" class="btn btn-outline-primary">Cambiar Contraseña</button>
+                </form>
+
+                <p class="card-text">Puedes introducir cualquier imagen con el formato .jpg, .jpeg, .png y .gif.</p>
+            </div>
+        </div>
+
         <div class="card bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">Cambiar imagen de perfil</div>
             <div class="card-body">

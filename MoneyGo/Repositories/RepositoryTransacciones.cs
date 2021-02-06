@@ -113,6 +113,18 @@ namespace MoneyGo.Repositories
             this.MailService.SendEmailRegistro(email, Nombre);
 
         }
+
+        public void CambiarPasswrod(Usuario usuario, string password)
+        {
+            Usuario user = usuario;
+
+            String salt = CypherService.GetSalt();
+            user.Salt = salt;
+            user.Password = CypherService.CifrarContenido(password, salt);
+
+            this.context.SaveChanges();
+
+        }
         public Usuario ValidarUsuario(String email, String password)
         {
             Usuario user = this.context.Usuarios.Where(z => z.Email == email).FirstOrDefault();
@@ -137,6 +149,14 @@ namespace MoneyGo.Repositories
                     return null;
                 }
             }
+        }
+
+        public String GetEmail(int idusuario)
+        {
+            Usuario user = this.context.Usuarios.Where(z => z.IdUsuario == idusuario).FirstOrDefault();
+
+            string email = user.Email;
+            return email;
         }
         #endregion
     }

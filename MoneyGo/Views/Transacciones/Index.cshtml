@@ -11,30 +11,34 @@
 </div>
 
 @* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
-<a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>
+
 
 @if (ViewData["CADENA"] != null)
 {
     @ViewData["CADENA"]
 }
 
-@if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null  )
+@if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null)
 {
-<div class="alert alert-success">
-   @TempData["MENSAJE"]
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+    <div class="alert alert-success">
+        @TempData["MENSAJE"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 }
 
-<form method="post">
-    <input type="file" name="filename" class="form-control-file" />
-    <button class="btn btn-success">Probar</button>
-</form>
 
-@if (Model != null)
+@if (Model == null)
 {
+    <br />
+    <div class="jumbotron">
+        <h4>Aún no tiene ninguna transacción, ¿desea crear <a asp-action="NuevaTransaccion" asp-controller="Transacciones">una?</a></h4>
+    </div>
+}
+else
+{
+    <a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -82,8 +86,8 @@
                                     ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
                                 </div>
                                 <div class="modal-footer">
-                                    
-                                    @Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion}, new {_class = "text-danger"})
+
+                                    @Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion }, new { _class = "text-danger" })
                                     <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
