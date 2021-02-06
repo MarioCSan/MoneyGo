@@ -13,7 +13,13 @@ namespace MoneyGo.Data
         {
 
         }
-        public DbSet<Transacciones> Transacciones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Transacciones> Transacciones { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>().HasAlternateKey(a => a.IdUsuario);
+            modelBuilder.Entity<Transacciones>().HasAlternateKey(a => a.IdUsuario);
+        }
     }
 }
