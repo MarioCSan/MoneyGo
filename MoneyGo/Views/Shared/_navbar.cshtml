@@ -28,27 +28,35 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Transacciones" asp-action="Index">Inicio</a>
                             </li>
                         }
-                        
+
                     </ul>
                 </div>
                 <div>
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 float-right">
                         @if (session != null)
                         {
-                            @if (userImg.ToLower() == "vacio")
-                            {
-                                <li class="nav-item"><a asp-action="Index" asp-controller="Management" class="nav-link">Panel de control</a></li>
-                                <li class="nav-item">
-                                    <img src="~/Images/UserLogo.svg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a asp-action="Index" asp-controller="Management" class="nav-link"><img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:2rem; height:2rem; border-radius:50%" alt="Imagen del usuario" /></a>
-                                    
-                                </li>
-                            }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle m-xl-n2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @if (userImg.ToLower() == "vacio")
+                                {
+                                    <img src="~/Images/UserLogo.svg" class="img-thumbnail " style="width:25%" alt="Imagen del usuario" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:2rem; height:2rem; border-radius:50%" alt="Imagen del usuario" />
+                                }
+                            </a>
+                          
+                           
+                            <div class="dropdown-menu" aria-labelledby="Menú">
+                                <a asp-action="Index" asp-controller="Management" class="dropdown-item">Opciones</a>
+                                <a class="text-danger dropdown-item">Cerrar sesión</a>
+                            </div>
+                        </li>
+
+
+
+                          
                         }
                     </ul>
 
