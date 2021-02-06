@@ -42,8 +42,8 @@ namespace MoneyGo.Controllers
             }
             else
             {
-                HttpContext.Session.SetInt32("id", user.IdUsuario);
-                HttpContext.Session.SetString("user", user.Nombre);
+                HttpContext.Session.SetInt32("user", user.IdUsuario);
+                HttpContext.Session.SetString("nombre", user.Nombre);
                 if (user.ImagenUsuario == null)
                 {
                     HttpContext.Session.SetString("img", "vacio");

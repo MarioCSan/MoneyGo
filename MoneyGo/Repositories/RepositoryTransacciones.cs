@@ -26,6 +26,13 @@ namespace MoneyGo.Repositories
             return this.context.Usuarios.Where(z => z.IdUsuario == id).FirstOrDefault();
         }
 
+        public void UpdateImagen(int idusuario, String imagen)
+        {
+            Usuario user = this.getDataUsuario(idusuario);
+            user.ImagenUsuario = imagen;
+            this.context.SaveChanges();
+        }
+
         #endregion
 
         #region transacciones
@@ -41,6 +48,8 @@ namespace MoneyGo.Repositories
             }
             return consulta.ToList();
         }
+
+        
 
         public Transacciones BuscarTransacciones(int IdTransaccion)
         {

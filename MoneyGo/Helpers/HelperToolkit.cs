@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace MoneyGo.Helpers
 {
     public class HelperToolkit
     {
-        public static object TempData { get; private set; }
+    
 
         public static bool CompararArrayBytes(byte[] a, byte[] b)
         {
@@ -50,8 +51,8 @@ namespace MoneyGo.Helpers
             }
             else 
             {
-                return "La extensión de la imagen no es válida. Los formatos válidos son: .jpg, .png y .gif";
-               
+                //TempData["name"] = "La extensión de la imagen no es válida. Los formatos válidos son: .jpg, .png y .gif";
+                return "error";
             }
         }
 

@@ -21,12 +21,18 @@ namespace MoneyGo.Helpers
         public async Task<String> UploadFileAsync(IFormFile fichero, Folders folder)
         {
             //Task => void. Task<??>
-            String filename = fichero.FileName;
+
+            String filename = HelperToolkit.Normalize(fichero.FileName);
             String path = this.pathProvider.MapPath(filename, Folders.Images);
-            using (var Stream = new FileStream(path, FileMode.Create))
+
+            if (filename.ToLower() != "error")
             {
-                await fichero.CopyToAsync(Stream);
+                using (var Stream = new FileStream(path, FileMode.Create))
+                {
+                    await fichero.CopyToAsync(Stream);
+                }
             }
+
 
             return path;
         }

@@ -20,8 +20,8 @@ namespace MoneyGo.Controllers
         public IActionResult Index()
         {
             int user = (int)HttpContext.Session.GetInt32("user");
-            ViewData["USUARIO"] = HttpContext.Session.GetInt32("user");
-            ViewData["NOMBRE"] = HttpContext.Session.GetString("nombre");
+            ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
+         
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);

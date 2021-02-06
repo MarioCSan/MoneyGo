@@ -1,1 +1,38 @@
 ﻿@model Usuario
+
+@if (ViewData["MSG"] != null)
+{
+    <div class="alert alert-dismissible alert-success">
+
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+
+            <div class="card-header">
+                <img src="~/Images/@Model.ImagenUsuario" class="card-img-top" />
+            </div>
+            <div class="card-body">
+               Hola @Model.NombreUsuario
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Cambiar imagen de perfil</div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    <h5 class="card-title">Seleccione una imagen de perfil</h5>
+                    <input type="file" name="imagen" class="form-control-file" />
+                    <button type="submit" class="btn btn-outline-primary">Cambiar imagen</button>
+                </form>
+
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

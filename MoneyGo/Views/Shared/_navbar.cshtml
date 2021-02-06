@@ -44,9 +44,9 @@
                             }
                             else
                             {
-                                <li class="nav-item"><a asp-action="Index" asp-controller="Management" class="nav-link">Panel de control</a></li>
                                 <li class="nav-item">
-                                    <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
+                                    <a asp-action="Index" asp-controller="Management" class="nav-link"><img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:2rem; height:2rem; border-radius:50%" alt="Imagen del usuario" /></a>
+                                    
                                 </li>
                             }
                         }
