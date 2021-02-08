@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AlumnoMCSD\\Documents\\NetCore\\MoneyGo\\MoneyGo\\MoneyGo.csproj": {}
+    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGo\\MoneyGo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AlumnoMCSD\\Documents\\NetCore\\MoneyGo\\MoneyGo\\MoneyGo.csproj": {
+    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGo\\MoneyGo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AlumnoMCSD\\Documents\\NetCore\\MoneyGo\\MoneyGo\\MoneyGo.csproj",
+        "projectUniqueName": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGo\\MoneyGo.csproj",
         "projectName": "MoneyGo",
-        "projectPath": "C:\\Users\\AlumnoMCSD\\Documents\\NetCore\\MoneyGo\\MoneyGo\\MoneyGo.csproj",
-        "packagesPath": "C:\\Users\\AlumnoMCSD\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AlumnoMCSD\\Documents\\NetCore\\MoneyGo\\MoneyGo\\obj\\",
+        "projectPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGo\\MoneyGo.csproj",
+        "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\AlumnoMCSD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -52,6 +51,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
             }
           },
           "imports": [
@@ -72,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
