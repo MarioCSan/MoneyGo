@@ -21,7 +21,7 @@ namespace MoneyGo.Controllers
         {
             int user = (int)HttpContext.Session.GetInt32("user");
             ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
-         
+            ViewData["user"] = user;
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);
@@ -47,7 +47,8 @@ namespace MoneyGo.Controllers
             DateTime fecha = Convert.ToDateTime(date);
 
             this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
-            return RedirectToAction("Index", new { IdUsuario = IdUsuario});
+            ViewData["MSG"] = "Transacción creada";
+            return RedirectToAction("Index", "Transacciones", new { IdUsuario = IdUsuario});
         }
 
         public IActionResult Delete(int idtransaccion)
