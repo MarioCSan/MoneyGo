@@ -1,0 +1,82 @@
+﻿@model Usuario
+
+
+@if (ViewData["MSG"] != null)
+{
+    <div class="alert alert-dismissible alert-success" role="alert">
+        @ViewData["MSG"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ViewData["ERR"] != null)
+{
+    <div class="alert alert-dismissible alert-danger" role="alert">
+        @ViewData["ERR"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+
+            <div class="card-header">
+                @if (Model.ImagenUsuario == null)
+                {
+                    <img src="~/Images/UserLogo.svg" class="card-img-top" />
+                }
+                else
+                {
+                    <img src="~/Images/@Model.ImagenUsuario" class="card-img-top" />
+                }
+            </div>
+            <div class="card-body">
+                Hola @Model.NombreUsuario
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="card bg-light mb-3 mr-3" style="max-width: 18rem;">
+            <div class="card-header">Cambiar Contraseña</div>
+            <div class="card-body">
+                <form method="post" asp-action="ChangePassword">
+                    <label>Contraseña antigua</label>
+                    <input type="password" name="oldpassword" class="form-control" />
+
+                    <label>Nueva contraseña</label>
+                    <input type="password" name="newpassword" class="form-control" />
+
+                    <label>Repita la contraseña</label>
+                    <input type="password" name="passwordconfirm" class="form-control" />
+                    <br />
+                    <button type="submit" class="btn btn-outline-primary">Cambiar Contraseña</button>
+                </form>
+
+                <p class="card-text">Introduzca una contraseña segura y no la comparta con nadie.</p>
+            </div>
+        </div>
+        
+        <div class="card bg-light mb-3 mr-3" style="max-width: 18rem;">
+            <div class="card-header">Cambiar imagen de perfil</div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    <h5 class="card-title">Seleccione una imagen de perfil</h5>
+                    <input type="file" name="imagen" class="form-control-file" />
+                    <br />
+                    <button type="submit" class="btn btn-outline-primary">Cambiar imagen</button>
+                </form>
+
+                <p class="card-text">Puedes introducir cualquier imagen con el formato .jpg, .jpeg, .png y .gif.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

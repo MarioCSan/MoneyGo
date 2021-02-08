@@ -1,0 +1,100 @@
+﻿@model List<Transacciones>
+@section navigation{
+
+}
+
+<div class="alert alert-primary">
+    Bienvenido @ViewData["USUARIO"],  @ViewData["NOMBRE"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
+
+
+@if (ViewData["CADENA"] != null)
+{
+    @ViewData["CADENA"]
+}
+
+@if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["MENSAJE"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+@if (Model == null)
+{
+    <br />
+    <div class="jumbotron">
+        <h4>Aún no tiene ninguna transacción, ¿desea crear <a asp-action="NuevaTransaccion" asp-controller="Transacciones">una?</a></h4>
+    </div>
+}
+else
+{
+    <a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Tipo de ingreso
+                </th>
+                <th>
+                    Concepto
+                </th>
+                <th>
+                    Fecha
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Transacciones trns in Model)
+            {
+                var tm = "#myModal" + trns.IdTransaccion;
+                var mid = "myModal" + trns.IdTransaccion;
+
+                <tr>
+                    <td>@trns.Cantidad</td>
+                    <td>@trns.TipoTransaccion</td>
+                    <td>@trns.Concepto</td>
+                    <td>@trns.FechaTransaccion</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="@tm">
+                            Eliminar
+                        </button>
+                    </td>
+
+
+
+                    <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" style="float: left;" class="close" data-dismiss="modal" aria-hidden="true">&times; Cerrar</button>
+                                    <h4 class="modal-title" id="myModalLabel">Confirmar eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
+                                </div>
+                                <div class="modal-footer">
+
+                                    @Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion }, new { _class = "text-danger" })
+                                    <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
