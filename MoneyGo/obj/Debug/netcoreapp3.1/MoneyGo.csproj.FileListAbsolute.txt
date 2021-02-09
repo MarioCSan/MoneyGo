@@ -153,6 +153,5 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Transacciones\NuevaTransaccion.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_navbar.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Management\Index.cshtml.g.cs

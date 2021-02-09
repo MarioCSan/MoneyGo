@@ -21,7 +21,7 @@ namespace MoneyGo.Controllers
         {
             int user = (int)HttpContext.Session.GetInt32("user");
             ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
-            ViewData["user"] = user;
+            
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);
