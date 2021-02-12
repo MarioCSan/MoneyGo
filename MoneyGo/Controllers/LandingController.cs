@@ -34,6 +34,7 @@ namespace MoneyGo.Controllers
         public IActionResult LogIn(String email, String password)
         {
             Usuario user = this.repo.ValidarUsuario(email, password);
+            
             if (user == null)
             {
                 ViewData["MENSAJE"] = "usuario/password no válidos";
@@ -42,7 +43,15 @@ namespace MoneyGo.Controllers
             else
             {
                 HttpContext.Session.SetInt32("user", user.IdUsuario);
-                HttpContext.Session.SetString("user", user.Nombre);
+                HttpContext.Session.SetString("nombre", user.Nombre);
+                if (user.ImagenUsuario == null)
+                {
+                    HttpContext.Session.SetString("img", "vacio");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("img", user.ImagenUsuario);
+                }
                 return RedirectToAction("Index", "Transacciones");
             }
 
