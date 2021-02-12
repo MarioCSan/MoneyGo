@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MoneyGo
 {
@@ -27,6 +28,15 @@ namespace MoneyGo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(
+                options =>
+                {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                }
+                ).AddCookie();
+
             services.AddSession(OptionsBuilderConfigurationExtensions =>
             {
                 OptionsBuilderConfigurationExtensions.IdleTimeout = TimeSpan.FromMinutes(10);
@@ -42,7 +52,7 @@ namespace MoneyGo
             services.AddTransient<RepositoryTransacciones>();
             services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,11 +77,11 @@ namespace MoneyGo
             app.UseRouting();
 
             app.UseStaticFiles();
-            app.UseEndpoints(endpoints =>
+            app.UseAuthentication();
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Landing}/{action=Index}/{id?}");
+                routes.MapRoute(name: "default"
+                    , template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

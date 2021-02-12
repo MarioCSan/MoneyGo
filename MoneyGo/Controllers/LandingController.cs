@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MoneyGo.Filters;
 
 namespace MoneyGo.Controllers
 {
@@ -21,6 +22,7 @@ namespace MoneyGo.Controllers
 
         public object HttpSesion { get; private set; }
 
+        [AuthorizeUsuarios]
         public IActionResult Index()
         {
             return View();
