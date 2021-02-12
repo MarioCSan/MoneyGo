@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Filters;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
@@ -17,8 +18,11 @@ namespace MoneyGo.Controllers
         {
             this.repo = repo;
         }
+
+        [AuthorizeUsuarios]
         public IActionResult Index()
         {
+
             int user = (int)HttpContext.Session.GetInt32("user");
             ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
             

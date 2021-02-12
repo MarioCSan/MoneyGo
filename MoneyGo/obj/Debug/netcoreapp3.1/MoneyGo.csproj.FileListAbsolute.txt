@@ -35,7 +35,6 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.pdb
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.genruntimeconfig.cache
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.csproj.CopyComplete
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll

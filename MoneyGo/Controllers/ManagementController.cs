@@ -24,32 +24,27 @@ namespace MoneyGo.Controllers
 
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("user") == null)
+
+            int id = (int)HttpContext.Session.GetInt32("user");
+            Usuario user = this.repo.getDataUsuario(id);
+
+            if (TempData["MSG"] != null)
             {
-                return RedirectToAction("Index", "Landing");
+                ViewData["MSG"] = TempData["MSG"];
             }
-            else
+
+            if (TempData["ERR"] != null)
             {
-                int id = (int)HttpContext.Session.GetInt32("user");
-                Usuario user = this.repo.getDataUsuario(id);
-
-                if (TempData["MSG"] != null)
-                {
-                    ViewData["MSG"] = TempData["MSG"];
-                }
-
-                if (TempData["ERR"] != null)
-                {
-                    ViewData["ERR"] = TempData["ERR"];
-                }
-
-                return View(user);
+                ViewData["ERR"] = TempData["ERR"];
             }
+
+            return View(user);
+
         }
 
 
         [HttpPost]
-        
+
         public IActionResult ChangePassword(String oldpassword, String newpassword, String passwordconfirm)
         {
             String email = this.repo.GetEmail((int)HttpContext.Session.GetInt32("user"));
@@ -60,12 +55,14 @@ namespace MoneyGo.Controllers
                 TempData["MSG"] = "Contraseña cambiada con éxito";
                 this.repo.CambiarPasswrod(user, newpassword);
 
-            } else if(user==null)
+            }
+            else if (user == null)
             {
                 user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
                 ViewData["ERR"] = "La contraseña antigua no es correcta";
                 return RedirectToAction("Index", "Landing");
-            } else
+            }
+            else
             {
                 user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
                 TempData["ERR"] = "La contraseñas no coinciden";

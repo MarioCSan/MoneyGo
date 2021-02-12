@@ -38,10 +38,12 @@ namespace MoneyGo.Controllers
             else
             {
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
-                    ClaimTypes.Name, ClaimTypes.Role);
-                identity.AddClaim(new Claim(ClaimTypes.Role, usr.IdUsuario.ToString()));
+                   ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, usr.Nombre));
-                identity.AddClaim(new Claim(ClaimTypes.Email, email)); ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+               
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
                     IsPersistent = true,
@@ -49,9 +51,20 @@ namespace MoneyGo.Controllers
                 });
 
                 HttpContext.Session.SetString("img", usr.ImagenUsuario);
-
                 return RedirectToAction("Index", "Transacciones");
             }
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
+        {
+            this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
+            return RedirectToAction("Index", "Transacciones");
         }
     }
 }

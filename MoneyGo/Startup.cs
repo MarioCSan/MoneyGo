@@ -31,11 +31,13 @@ namespace MoneyGo
             services.AddAuthentication(
                 options =>
                 {
-                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                }
-                ).AddCookie();
+                    options.DefaultAuthenticateScheme =
+                    CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme =
+                    CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme =
+                    CookieAuthenticationDefaults.AuthenticationScheme;
+                }).AddCookie();
 
             services.AddSession(OptionsBuilderConfigurationExtensions =>
             {
@@ -62,26 +64,20 @@ namespace MoneyGo
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
+
+
             app.UseStaticFiles();
 
             //Session
             app.UseSession();
-            
+
             app.UseRouting();
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc(routes =>
+            app.UseMvc(configureRoutes =>
             {
-                routes.MapRoute(name: "default"
-                    , template: "{controller=Home}/{action=Index}/{id?}");
+                configureRoutes.MapRoute(name: "default", template: "{controller=Landing}/{action=Index}/{id?}");
             });
         }
     }

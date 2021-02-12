@@ -20,44 +20,42 @@ namespace MoneyGo.Controllers
             this.repo = repo;
         }
 
-        public object HttpSesion { get; private set; }
-
-        [AuthorizeUsuarios]
+        
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult LogIn()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult LogIn(String email, String password)
-        {
-            Usuario user = this.repo.ValidarUsuario(email, password);
+        //public IActionResult LogIn()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult LogIn(String email, String password)
+        //{
+        //    Usuario user = this.repo.ValidarUsuario(email, password);
             
-            if (user == null)
-            {
-                ViewData["MENSAJE"] = "usuario/password no válidos";
-                return View();
-            }
-            else
-            {
-                HttpContext.Session.SetInt32("user", user.IdUsuario);
-                HttpContext.Session.SetString("nombre", user.Nombre);
-                if (user.ImagenUsuario == null)
-                {
-                    HttpContext.Session.SetString("img", "vacio");
-                }
-                else
-                {
-                    HttpContext.Session.SetString("img", user.ImagenUsuario);
-                }
-                return RedirectToAction("Index", "Transacciones");
-            }
+        //    if (user == null)
+        //    {
+        //        ViewData["MENSAJE"] = "usuario/password no válidos";
+        //        return View();
+        //    }
+        //    else
+        //    {
+        //        HttpContext.Session.SetInt32("user", user.IdUsuario);
+        //        HttpContext.Session.SetString("nombre", user.Nombre);
+        //        if (user.ImagenUsuario == null)
+        //        {
+        //            HttpContext.Session.SetString("img", "vacio");
+        //        }
+        //        else
+        //        {
+        //            HttpContext.Session.SetString("img", user.ImagenUsuario);
+        //        }
+        //        return RedirectToAction("Index", "Transacciones");
+        //    }
 
-        }
+        //}
 
         public IActionResult Register()
         {
