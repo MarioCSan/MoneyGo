@@ -3,8 +3,9 @@
 
 }
 
+
 <div class="alert alert-primary" id="inicio">
-    Bienvenido @ViewData["USUARIO"]
+    Bienvenido @ViewData["user"]
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -131,7 +132,7 @@
             <div class="modal-body">
                 <form method="post" asp-action="NuevaTransaccion">
                     <div class="form-group">
-                        <input name="IdUsuario" value="@ViewData["user"]" class="form-control" hidden />
+                        <input name="IdUsuario" value="@ViewData["user"]" class="form-control"  />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Cantidad: </label>
