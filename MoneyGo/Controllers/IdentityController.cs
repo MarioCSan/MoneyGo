@@ -32,24 +32,22 @@ namespace MoneyGo.Controllers
 
             if (usr == null)
             {
-                ViewData["MENSAJE"] = "usuario password incorrecto";
+                ViewData["MENSAJE"] = "usuario o password incorrecto";
                 return View();
             }
             else
             {
-                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
-                   ClaimTypes.Name, ClaimTypes.Role);
-                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
-                identity.AddClaim(new Claim(ClaimTypes.Name, usr.Nombre));
-               
-                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
+                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
+                    ClaimTypes.Name, ClaimTypes.Role);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Name, usr.ImagenUsuario));
+                identity.AddClaim(new Claim(ClaimTypes.Role, usr.Email)); ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
                     IsPersistent = true,
-                    ExpiresUtc = DateTime.Now.AddMinutes(15)
+                    ExpiresUtc = DateTime.Now.AddMinutes(5)
                 });
-
                 HttpContext.Session.SetString("img", usr.ImagenUsuario);
                 return RedirectToAction("Index", "Transacciones");
             }

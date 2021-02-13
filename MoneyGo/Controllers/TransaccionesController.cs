@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Filters;
 using MoneyGo.Helpers;
@@ -7,6 +8,7 @@ using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MoneyGo.Controllers
@@ -14,17 +16,22 @@ namespace MoneyGo.Controllers
     public class TransaccionesController : Controller
     {
         RepositoryTransacciones repo;
+      
         public TransaccionesController(RepositoryTransacciones repo)
         {
             this.repo = repo;
+      
         }
 
         [AuthorizeUsuarios]
         public IActionResult Index()
         {
 
-            int user = (int)HttpContext.Session.GetInt32("user");
-            ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
+            var user = Int32.Parse( User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            HttpContext.Session.SetInt32("user", user);
+
+            //ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
             
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 

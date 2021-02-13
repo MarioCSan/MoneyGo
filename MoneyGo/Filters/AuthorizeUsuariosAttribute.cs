@@ -16,14 +16,10 @@ namespace MoneyGo.Filters
             var user = context.HttpContext.User;
             if (!user.Identity.IsAuthenticated)
             {
-                context.Result = this.RedirectToRoute("Identity", "Login");
-            } else
-            {
-                context.Result = this.RedirectToRoute("Transacciones", "Index");
+                context.Result = this.GetRedirectToRoute("Identity", "Login");
             }
         }
-
-        private RedirectToRouteResult RedirectToRoute(String controller, String action)
+        private RedirectToRouteResult GetRedirectToRoute(String controller, String action)
         {
             RouteValueDictionary ruta = new RouteValueDictionary(new
             {
