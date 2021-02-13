@@ -24,24 +24,26 @@ namespace MoneyGo.Controllers
         }
 
         [AuthorizeUsuarios]
-        public IActionResult Index()
+        public IActionResult Index(int? posicion)
         {
-            var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            int pos = 0;
+            if (posicion == null)
+            {
+                pos = 1;
+                
+            }
             
-            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);   
-            List<Transacciones> transacciones = this.repo.GetTransacciones(user);
+            int registros = 0;
+           
 
+            var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(pos, user, ref registros);
+            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);   
+           
+            ViewData["NUMEROREGISTROS"] = registros;
             return View(transacciones);
         }
-        //prueba del sanitizer
-        [HttpPost]
-        public IActionResult Index(String filename) {
-
-            String sanitize = HelperToolkit.Normalize(filename);
-            ViewData["CADENA"] = sanitize;
-            return View();
-        }
-
+       
         public IActionResult NuevaTransaccion(int id)
         {
             ViewData["user"] = id;

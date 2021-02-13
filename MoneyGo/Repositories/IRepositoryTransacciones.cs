@@ -9,5 +9,6 @@ namespace MoneyGo.Repositories
     interface IRepositoryTransacciones
     {
         List<Transacciones> GetTransacciones(int idusuario);
+        List<Transacciones> GetTransaccionesPaginacion(int posicion, ref int numerotransacciones);
     }
 }

@@ -1,4 +1,6 @@
-﻿using MoneyGo.Data;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MoneyGo.Data;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
 using System;
@@ -10,6 +12,26 @@ namespace MoneyGo.Repositories
 {
     public class RepositoryTransacciones
     {
+
+        #region procedures
+        //ALTER VIEW PAGINARTRANSACCIONES
+        //AS
+        //SELECT ROW_NUMBER() OVER(ORDER BY IDTRANSACCION)
+        //AS POSICION
+        //, Transacciones.* FROM TRANSACCIONES
+        //GO
+        //ALTER PROCEDURE PAGINACIONTRANSACCIONES
+        //(@POSICION INT, @REGISTROS INT OUT)
+        //AS
+        //SELECT @REGISTROS = COUNT(idtransaccion)
+        //FROM PAGINARTRANSACCIONES
+        //SELECT* FROM PAGINARTRANSACCION
+        //WHERE POSICION >= @POSICION AND
+        //POSICION<(@POSICION + 4)
+        //GO
+
+
+        #endregion
         TransaccionesContext context;
         MailService MailService;
 
@@ -49,11 +71,11 @@ namespace MoneyGo.Repositories
             return consulta.ToList();
         }
 
-        
+
 
         public Transacciones BuscarTransacciones(int IdTransaccion)
         {
-            return this.context.Transacciones.Where(z=> z.IdTransaccion == IdTransaccion).FirstOrDefault();
+            return this.context.Transacciones.Where(z => z.IdTransaccion == IdTransaccion).FirstOrDefault();
         }
 
         public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, String Concepto, DateTime Fecha)
@@ -84,6 +106,19 @@ namespace MoneyGo.Repositories
             this.context.SaveChanges();
         }
 
+        public List<Transacciones> GetTransaccionesPaginacion(int posicion, int idusuario, ref int numerotransacciones)
+        {
+            String sql = "PAGINACIONTRANSACCIONES @POSICION, @IDUSUARIO, @REGISTROS OUT";
+            SqlParameter pamposicion = new SqlParameter("@POSICION", posicion);
+            SqlParameter pamusuario = new SqlParameter("@IDUSUARIO", idusuario);
+            SqlParameter pamregistros = new SqlParameter("@REGISTROS", -1);
+            pamregistros.Direction = System.Data.ParameterDirection.Output;
+
+            numerotransacciones = Convert.ToInt32(pamregistros.Value);
+
+            List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario ,pamregistros).ToList();
+            return transacciones;
+        }
 
         #endregion
 

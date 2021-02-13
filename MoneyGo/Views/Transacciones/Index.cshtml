@@ -3,6 +3,10 @@
 
 }
 
+@{
+    int numeropagina = 1;
+    int registros = (int)ViewData["NUMEROREGISTROS"];
+}
 
 <div class="alert alert-primary" id="inicio">
     Bienvenido @ViewData["USUARIO"]
@@ -32,6 +36,37 @@
 
 
 <div class="jumbotron">
+
+
+    <ul class="list-group list-group-horizontal">
+        @for (int i = 1; i <= registros; i += 4)
+        {
+            if (ViewData["SALARIO"] == null)
+            {
+                <li class="list-group-item">
+                    <a asp-controller="Trabajadores"
+                       asp-action="PaginarTrabajadores"
+                       asp-route-posicion="@i">
+                        @numeropagina
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="list-group-item">
+                    <a asp-controller="Trabajadores"
+                       asp-action="PaginarTrabajadores"
+                       asp-route-posicion="@i"
+                       asp-route-salario="@ViewData["SALARIO"]">
+                        @numeropagina
+                    </a>
+                </li>
+            }
+            numeropagina += 1;
+        }
+    </ul>
+
+
     <div class="mb-2">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Nueva transaccion
@@ -132,7 +167,7 @@
             <div class="modal-body">
                 <form method="post" asp-action="NuevaTransaccion">
                     <div class="form-group">
-                        <input name="IdUsuario" value="@ViewData["user"]" class="form-control"  />
+                        <input name="IdUsuario" value="@ViewData["user"]" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Cantidad: </label>
