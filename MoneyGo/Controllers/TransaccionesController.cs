@@ -26,13 +26,9 @@ namespace MoneyGo.Controllers
         [AuthorizeUsuarios]
         public IActionResult Index()
         {
-
-            var user = Int32.Parse( User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            HttpContext.Session.SetInt32("user", user);
-
-            //ViewData["USUARIO"] = HttpContext.Session.GetString("nombre");
+            var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             
+            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);   
             List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             return View(transacciones);

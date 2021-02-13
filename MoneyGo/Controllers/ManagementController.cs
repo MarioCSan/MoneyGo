@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Filters;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
@@ -22,6 +23,7 @@ namespace MoneyGo.Controllers
             this.PathProvider = PathProvider;
         }
 
+        [AuthorizeUsuarios]
         public IActionResult Index()
         {
 

@@ -7,6 +7,7 @@ using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -41,13 +42,17 @@ namespace MoneyGo.Controllers
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
                     ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
-                identity.AddClaim(new Claim(ClaimTypes.Name, usr.ImagenUsuario));
-                identity.AddClaim(new Claim(ClaimTypes.Role, usr.Email)); ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                identity.AddClaim(new Claim(ClaimTypes.Name, usr.NombreUsuario));
+                identity.AddClaim(new Claim(ClaimTypes.Email, usr.Email)); 
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = DateTime.Now.AddMinutes(5)
                 });
+
+
+                HttpContext.Session.SetInt32("user", usr.IdUsuario);
                 HttpContext.Session.SetString("img", usr.ImagenUsuario);
                 return RedirectToAction("Index", "Transacciones");
             }
@@ -62,7 +67,14 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
         {
             this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-            return RedirectToAction("Index", "Transacciones");
+            return RedirectToAction("Index", "Landing");
+        }
+
+        public IActionResult Logout()
+        {
+           //ELiminar la sesión, pero como?
+
+            return RedirectToAction("Index", "Landing");
         }
     }
 }
