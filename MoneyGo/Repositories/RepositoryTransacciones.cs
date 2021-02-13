@@ -14,21 +14,25 @@ namespace MoneyGo.Repositories
     {
 
         #region procedures
-        //ALTER VIEW PAGINARTRANSACCIONES
-        //AS
-        //SELECT ROW_NUMBER() OVER(ORDER BY IDTRANSACCION)
-        //AS POSICION
-        //, Transacciones.* FROM TRANSACCIONES
-        //GO
+        // ALTER VIEW PAGINARTRANSACCIONES
+        //  AS
+        //     SELECT ROW_NUMBER() OVER(ORDER BY IDTRANSACCION)
+        //     AS POSICION
+        //     , Transacciones.* FROM TRANSACCIONES
+        // GO
+
         //ALTER PROCEDURE PAGINACIONTRANSACCIONES
-        //(@POSICION INT, @REGISTROS INT OUT)
-        //AS
-        //SELECT @REGISTROS = COUNT(idtransaccion)
-        //FROM PAGINARTRANSACCIONES
-        //SELECT* FROM PAGINARTRANSACCION
-        //WHERE POSICION >= @POSICION AND
-        //POSICION<(@POSICION + 4)
-        //GO
+        // (@POSICION INT, @IDUSUARIO int, @REGISTROS INT OUT)
+        // AS
+        //     SELECT @REGISTROS = COUNT(idtransaccion)
+
+        //     FROM PAGINARTRANSACCIONES
+
+        //     SELECT* FROM PAGINARTRANSACCIONES
+        //    WHERE IDUSUARIO = @IDUSUARIO AND(POSICION >= @POSICION AND
+
+        //     POSICION<(@POSICION + 4))
+        // GO
 
 
         #endregion
@@ -116,7 +120,7 @@ namespace MoneyGo.Repositories
 
             numerotransacciones = Convert.ToInt32(pamregistros.Value);
 
-            List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario ,pamregistros).ToList();
+            List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario, pamregistros).ToList();
             return transacciones;
         }
 
