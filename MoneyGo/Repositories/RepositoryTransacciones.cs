@@ -21,18 +21,18 @@ namespace MoneyGo.Repositories
         //     , Transacciones.* FROM TRANSACCIONES
         // GO
 
-        //ALTER PROCEDURE PAGINACIONTRANSACCIONES
-        // (@POSICION INT, @IDUSUARIO int, @REGISTROS INT OUT)
-        // AS
-        //     SELECT @REGISTROS = COUNT(idtransaccion)
+        //    ALTER PROCEDURE[dbo].[PAGINACIONTRANSACCIONES]
+        //    (@POSICION INT, @IDUSUARIO int, @REGISTROS INT OUT)
+        //    AS
+        //       SELECT @REGISTROS = COUNT(IdTransaccion) FROM PAGINARTRANSACCIONES where IdUsuario = @IDUSUARIO
 
-        //     FROM PAGINARTRANSACCIONES
+        //SELECT POSICION, IdTransaccion, IdUsuario, cantidad, FechaTransaccion, TipoTransaccion, Concepto FROM PAGINARTRANSACCIONES
 
-        //     SELECT* FROM PAGINARTRANSACCIONES
-        //    WHERE IDUSUARIO = @IDUSUARIO AND(POSICION >= @POSICION AND
+        //WHERE POSICION >= @POSICION AND
 
-        //     POSICION<(@POSICION + 4))
-        // GO
+        //POSICION<(@POSICION + 2)
+
+        //GO
 
 
         #endregion

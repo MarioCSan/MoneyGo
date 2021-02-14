@@ -26,10 +26,10 @@ namespace MoneyGo.Controllers
         [AuthorizeUsuarios]
         public IActionResult Index(int? posicion)
         {
-            int pos = 0;
+
             if (posicion == null)
             {
-                pos = 1;
+                posicion = 1;
                 
             }
             
@@ -37,7 +37,7 @@ namespace MoneyGo.Controllers
            
 
             var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(pos, user, ref registros);
+            List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(posicion.Value, user, ref registros);
             ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);
             ViewData["ID"] = user;
             ViewData["NUMEROREGISTROS"] = registros;
@@ -52,7 +52,7 @@ namespace MoneyGo.Controllers
             int IdUsuario = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
             ViewData["MSG"] = "Transacción creada";
-            return RedirectToAction("Index", "Transacciones", new { IdUsuario = IdUsuario});
+            return RedirectToAction("Index", "Transacciones");
         }
 
         public IActionResult Delete(int idtransaccion)
