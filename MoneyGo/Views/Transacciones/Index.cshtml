@@ -39,10 +39,9 @@
 
 
     <ul class="list-group list-group-horizontal">
-        @for (int i = 1; i <= registros; i += 4)
+        @for (int i = 1; i <= registros; i+=4)
         {
-            if (ViewData["NUMEROREGISTROS"] == null)
-            {
+            
                 <li class="list-group-item">
                     <a asp-controller="Transacciones"
                        asp-action="Index"
@@ -50,18 +49,7 @@
                         @numeropagina
                     </a>
                 </li>
-            }
-            else
-            {
-                <li class="list-group-item">
-                    <a asp-controller="Transacciones"
-                       asp-action="Index"
-                       asp-route-posicion="@i"
-                     >
-                        @numeropagina
-                    </a>
-                </li>
-            }
+           
             numeropagina += 1;
         }
     </ul>
@@ -86,6 +74,7 @@
             <table class="table table-bordered table-dark">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>
                             Cantidad
                         </th>
@@ -106,42 +95,43 @@
                         var tm = "#myModal" + trns.IdTransaccion;
                         var mid = "myModal" + trns.IdTransaccion;
 
-                        <tr>
-                            <td>@trns.Cantidad</td>
-                            <td>@trns.TipoTransaccion</td>
-                            <td>@trns.Concepto</td>
-                            <td>@trns.FechaTransaccion</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="@tm">
-                                    Eliminar
-                                </button>
-                            </td>
+                    <tr>
+                        <td>@trns.IdTransaccion</td>
+                        <td>@trns.Cantidad</td>
+                        <td>@trns.TipoTransaccion</td>
+                        <td>@trns.Concepto</td>
+                        <td>@trns.FechaTransaccion</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="@tm">
+                                Eliminar
+                            </button>
+                        </td>
 
 
 
-                            <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" style="float: left;" class="close" data-dismiss="modal" aria-hidden="true">&times; Cerrar</button>
-                                            <h4 class="modal-title" id="myModalLabel">Confirmar eliminación</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form method="post" asp-action="Delete">
-                                                <input type="number" value="@trns.IdTransaccion" name="idtransaccion" hidden />
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                                            </form>
+                        <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" style="float: left;" class="close" data-dismiss="modal" aria-hidden="true">&times; Cerrar</button>
+                                        <h4 class="modal-title" id="myModalLabel">Confirmar eliminación</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" asp-action="Delete">
+                                            <input type="number" value="@trns.IdTransaccion" name="idtransaccion" hidden />
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
 
-                                            @*@Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion }, new { _class = "text-danger" })*@
-                                            <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
-                                        </div>
+                                        @*@Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion }, new { _class = "text-danger" })*@
+                                        <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>
-                        </tr>
+                        </div>
+                    </tr>
                     }
                 </tbody>
             </table>
