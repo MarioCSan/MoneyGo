@@ -118,9 +118,8 @@ namespace MoneyGo.Repositories
             SqlParameter pamregistros = new SqlParameter("@REGISTROS", -1);
             pamregistros.Direction = System.Data.ParameterDirection.Output;
 
-            numerotransacciones = Convert.ToInt32(pamregistros.Value);
-
             List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario, pamregistros).ToList();
+            numerotransacciones = Convert.ToInt32(pamregistros.Value);
             return transacciones;
         }
 

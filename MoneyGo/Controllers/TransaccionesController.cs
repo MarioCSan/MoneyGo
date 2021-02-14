@@ -38,23 +38,18 @@ namespace MoneyGo.Controllers
 
             var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(pos, user, ref registros);
-            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);   
-           
+            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);
+            ViewData["ID"] = user;
             ViewData["NUMEROREGISTROS"] = registros;
             return View(transacciones);
         }
-       
-        public IActionResult NuevaTransaccion(int id)
-        {
-            ViewData["user"] = id;
-            return View();
-        }
+
         [HttpPost]
-        public IActionResult NuevaTransaccion(int IdUsuario, float cantidad, String tipoTransaccion, String Concepto)
+        public IActionResult NuevaTransaccion(float cantidad, String tipoTransaccion, String Concepto)
         {
             String date = DateTime.Now.ToShortDateString();
             DateTime fecha = Convert.ToDateTime(date);
-
+            int IdUsuario = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
             ViewData["MSG"] = "Transacción creada";
             return RedirectToAction("Index", "Transacciones", new { IdUsuario = IdUsuario});
