@@ -126,7 +126,19 @@ namespace MoneyGo.Repositories
         #endregion
 
         #region usuariosLogin
+        public bool BuscarEmail(String email)
+        {
+            bool emailValido = false;
+            var consulta = from datos in this.context.Usuarios
+                           where datos.Email == email
+                           select datos;
 
+            if (consulta == null)
+            {
+                emailValido = true;
+            }
+            return emailValido;
+        }
         //Storedprocedure para el alta de usuario??
         public void InsertarUsuario(String nombreUsuario, String password, String Nombre, String email)
         {

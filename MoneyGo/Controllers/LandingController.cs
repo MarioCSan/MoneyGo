@@ -62,10 +62,26 @@ namespace MoneyGo.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(String nombre, String nombreUsuario, String password, String email)
+        public IActionResult Register(String nombre, String nombreUsuario, String password, String RepetirPassword, String email)
         {
-            this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-            ViewData["MENSAJE"] = "Revise la bandeja de entrada de su email";
+            if(password == RepetirPassword) {
+                bool valido = this.repo.BuscarEmail(email);
+
+                if (valido)
+                {
+                    this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
+                    ViewData["MENSAJE"] = "Revise la bandeja de entrada de su email.";
+                }
+                else
+                {
+                    ViewData["Error"] = "El email ya esta en uso.";
+                }
+                
+            } else
+            {
+                ViewData["Error"] = "Las contraseñas no son iguales.";
+            }
+            
             return View();
         }
     }
