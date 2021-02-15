@@ -28,13 +28,20 @@ using MoneyGo.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Http;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9e99aac9c966314ad25b808e4b9c647030dd3348", @"/Views/Management/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"054575370c3dac1b7426f471dfe3ae7f0c5dfdb5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7b9bd6396f31a0c5b25e9c5e1a09dd8186a539e0", @"/Views/_ViewImports.cshtml")]
     public class Views_Management_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Usuario>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/Images/UserLogo.svg"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -128,7 +135,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
             WriteLiteral("                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9e99aac9c966314ad25b808e4b9c647030dd33487633", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9e99aac9c966314ad25b808e4b9c647030dd33487828", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -153,7 +160,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
             WriteLiteral("                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9e99aac9c966314ad25b808e4b9c647030dd33489026", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9e99aac9c966314ad25b808e4b9c647030dd33489221", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -205,7 +212,7 @@ AddHtmlAttributeValue("", 1031, Model.ImagenUsuario, 1031, 20, false);
             <div class=""card-header"">Cambiar Contraseña</div>
             <div class=""card-body"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e99aac9c966314ad25b808e4b9c647030dd334811434", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e99aac9c966314ad25b808e4b9c647030dd334811629", async() => {
                 WriteLiteral(@"
                     <label>Contraseña antigua</label>
                     <input type=""password"" name=""oldpassword"" class=""form-control"" />
@@ -245,7 +252,7 @@ AddHtmlAttributeValue("", 1031, Model.ImagenUsuario, 1031, 20, false);
             <div class=""card-header"">Cambiar imagen de perfil</div>
             <div class=""card-body"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e99aac9c966314ad25b808e4b9c647030dd334814023", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e99aac9c966314ad25b808e4b9c647030dd334814218", async() => {
                 WriteLiteral(@"
                     <h5 class=""card-title"">Seleccione una imagen de perfil</h5>
                     <input type=""file"" name=""imagen"" class=""form-control-file"" />

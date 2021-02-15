@@ -55,7 +55,7 @@ namespace MoneyGo.Controllers
             if (user != null && newpassword.Equals(passwordconfirm))
             {
                 TempData["MSG"] = "Contraseña cambiada con éxito";
-                this.repo.CambiarPasswrod(user, newpassword);
+                this.repo.CambiarPassword(user, newpassword);
 
             }
             else if (user == null)

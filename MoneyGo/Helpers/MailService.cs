@@ -89,5 +89,38 @@ namespace MoneyGo.Helpers
             smtpClient.Credentials = usercredential;
             smtpClient.Send(mail);
         }
+
+        public void SendEmailRecuperacion(string email, string link)
+        {
+            MailMessage mail = new MailMessage();
+            String usermail = this.configuration["usuariomail"];
+            String passwordmail = this.configuration["passwordmail"];
+
+            String mensaje = "Ha recibido este mensaje porque ha solicitado el reseteo de su contraseña. Si no lo ha solicitado, ignore este mensaje.\nSu enlace es: <a href=" + link + ">" + link + "</a>";
+
+            mail.From = new MailAddress(usermail);
+            mail.To.Add(new MailAddress(email));
+            mail.Subject = "Reseteo de contraseña";
+            mail.Body = mensaje;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.Normal;
+
+            String smtpserver = this.configuration["host"];
+            int port = int.Parse(this.configuration["port"]);
+            bool ssl = bool.Parse(this.configuration["ssl"]);
+            bool defaultcreadentials = bool.Parse(this.configuration["defaultcredentials"]);
+
+            SmtpClient smtpClient = new SmtpClient();
+
+            smtpClient.Host = smtpserver;
+            smtpClient.Port = port;
+            smtpClient.EnableSsl = ssl;
+            smtpClient.UseDefaultCredentials = defaultcreadentials;
+
+            NetworkCredential usercredential = new NetworkCredential(usermail, passwordmail);
+
+            smtpClient.Credentials = usercredential;
+            smtpClient.Send(mail);
+        }
     }
 }

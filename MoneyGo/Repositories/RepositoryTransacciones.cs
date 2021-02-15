@@ -133,7 +133,35 @@ namespace MoneyGo.Repositories
                            where datos.Email == email
                            select datos;
 
-            if (consulta == null)
+            if (consulta != null)
+            {
+                emailValido = true;
+            }
+            return emailValido;
+        }
+
+        public Usuario GetUsuarioEmail(String email)
+        {
+            bool emailValido = BuscarEmail(email);
+
+            if (emailValido)
+            {
+                return this.context.Usuarios.SingleOrDefault(x => x.Email == email);
+
+            } else
+            {
+                return null;
+            }
+        }
+
+        public bool BuscarEmailRecuperacion(String email)
+        {
+            bool emailValido = false;
+            var consulta = from datos in this.context.Usuarios
+                           where datos.Email == email
+                           select datos;
+
+            if (consulta != null)
             {
                 emailValido = true;
             }
@@ -164,7 +192,7 @@ namespace MoneyGo.Repositories
 
         }
 
-        public void CambiarPasswrod(Usuario usuario, string password)
+        public void CambiarPassword(Usuario usuario, string password)
         {
             Usuario user = usuario;
 
@@ -175,6 +203,7 @@ namespace MoneyGo.Repositories
             this.context.SaveChanges();
 
         }
+
         public Usuario ValidarUsuario(String email, String password)
         {
             Usuario user = this.context.Usuarios.Where(z => z.Email == email).FirstOrDefault();

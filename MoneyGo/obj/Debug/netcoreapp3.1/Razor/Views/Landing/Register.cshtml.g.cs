@@ -28,13 +28,20 @@ using MoneyGo.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Http;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0d99b668af996bab92306d1296755badf8188144", @"/Views/Landing/Register.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"054575370c3dac1b7426f471dfe3ae7f0c5dfdb5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7b9bd6396f31a0c5b25e9c5e1a09dd8186a539e0", @"/Views/_ViewImports.cshtml")]
     public class Views_Landing_Register : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Terminos", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -124,7 +131,7 @@ using Microsoft.AspNetCore.Http;
 #line hidden
 #nullable disable
             WriteLiteral("                    <br />\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d99b668af996bab92306d1296755badf81881446792", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d99b668af996bab92306d1296755badf81881446987", async() => {
                 WriteLiteral(@"
 
                         <div class=""form-label-group"">
@@ -155,7 +162,7 @@ using Microsoft.AspNetCore.Http;
                         <div class=""custom-control custom-checkbox mb-3"">
                             <input type=""checkbox"" name=""Terminos"" class=""custom-control-input"" id=""customCheck1"" required>
                             <label class=""custom-control-label"" for=""customCheck1"">Acepto los ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d99b668af996bab92306d1296755badf81881449067", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d99b668af996bab92306d1296755badf81881449262", async() => {
                     WriteLiteral("Terminos y condiciones");
                 }
                 );

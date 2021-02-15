@@ -8,16 +8,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MoneyGo.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using MoneyGo.Helpers;
+using System.Security.Claims;
 
 namespace MoneyGo.Controllers
 {
     public class LandingController : Controller
     {
+       
         RepositoryTransacciones repo;
-
-        public LandingController(RepositoryTransacciones repo)
+        MailService mailService;
+        public LandingController(RepositoryTransacciones repo, MailService mailService)
         {
             this.repo = repo;
+            this.mailService = mailService;
         }
 
         
@@ -83,6 +89,66 @@ namespace MoneyGo.Controllers
             }
             
             return View();
+        }
+
+
+
+        public IActionResult RecuperarPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RecuperarPassword(String email)
+        {
+            
+            Usuario usuario = this.repo.GetUsuarioEmail(email);
+            if (usuario != null)
+            {
+                // logica envio emailñ con token de recuperación
+
+                var token = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier); // await Usuario.GeneratePasswordResetTokenAsync(usuario);
+                var link = Url.Action("ResetPassword", "Landing", new { token, email = email }, Request.Scheme);
+                this.mailService.SendEmailRecuperacion(email, link);
+                ViewData["MSG"] = "Se ha enviado un email de recuperación. Revise su correo.";
+
+            }
+            else
+            {
+                ViewData["MSG"] = "No existe ninguna cuenta asociada al email introducido.";
+
+            }
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            Usuario usuario = this.repo.GetUsuarioEmail(email);
+            ViewData["token"] = token;
+            return View(usuario);
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(String email, String password, String passwordConfirm)
+        {
+            if (password.Equals(passwordConfirm))
+            {
+                Usuario usuario = this.repo.GetUsuarioEmail(email);
+                this.repo.CambiarPassword(usuario, password);
+
+                return RedirectToAction("Index", "Landing");
+
+            }
+            else
+            {
+                ViewData["ERROR"] = "Las contraseñas no son iguales";
+                return View();
+            }
+
+
         }
     }
 }

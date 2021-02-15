@@ -28,13 +28,20 @@ using MoneyGo.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
+using System.Security.Claims;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Http;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"01b17ce6a63a61df7d0b4323e40de8e46464290d", @"/Views/Transacciones/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"054575370c3dac1b7426f471dfe3ae7f0c5dfdb5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7b9bd6396f31a0c5b25e9c5e1a09dd8186a539e0", @"/Views/_ViewImports.cshtml")]
     public class Views_Transacciones_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Transacciones>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Transacciones", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -157,7 +164,7 @@ Write(ViewData["CADENA"]);
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"list-group-item\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d9571", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d9766", async() => {
                 WriteLiteral("\r\n                        ");
 #nullable restore
 #line 49 "C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\Views\Transacciones\Index.cshtml"
@@ -218,7 +225,7 @@ Write(ViewData["CADENA"]);
 #nullable disable
             WriteLiteral("        <br />\r\n");
             WriteLiteral("        <h4>Aún no tiene ninguna transacción, ¿desea crear ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d13099", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d13294", async() => {
                 WriteLiteral("una?");
             }
             );
@@ -343,7 +350,7 @@ WriteAttributeValue("", 3326, mid, 3326, 4, false);
                                     </div>
                                     <div class=""modal-footer"">
                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d19122", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d19317", async() => {
                 WriteLiteral("\r\n                                            <input type=\"number\"");
                 BeginWriteAttribute("value", " value=\"", 4353, "\"", 4380, 1);
 #nullable restore
@@ -414,7 +421,7 @@ WriteAttributeValue("", 4361, trns.IdTransaccion, 4361, 19, false);
             </div>
             <div class=""modal-body"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d22946", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d23141", async() => {
                 WriteLiteral("\r\n                    <div class=\"form-group\">\r\n                        <input name=\"IdUsuario\"");
                 BeginWriteAttribute("value", " value=\"", 5922, "\"", 5945, 1);
 #nullable restore
@@ -436,7 +443,7 @@ WriteAttributeValue("", 5930, ViewData["ID"], 5930, 15, false);
                         <label class=""control-label"">Tipo de transacción</label>
                         <select name=""TipoTransaccion"" class=""form-control"">
                             ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d24310", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d24505", async() => {
                     WriteLiteral("Ingreso");
                 }
                 );
@@ -452,7 +459,7 @@ WriteAttributeValue("", 5930, ViewData["ID"], 5930, 15, false);
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d25563", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01b17ce6a63a61df7d0b4323e40de8e46464290d25758", async() => {
                     WriteLiteral("Gasto");
                 }
                 );

@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MoneyGo.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MoneyGo
 {
@@ -50,6 +52,8 @@ namespace MoneyGo
             services.AddSingleton<MailService>();
             //services.AddSingleton<UploadService>();
             services.AddSingleton<PathProvider>();
+
+
 
             services.AddTransient<RepositoryTransacciones>();
             services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));

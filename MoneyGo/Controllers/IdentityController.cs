@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Helpers;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
 using System;
@@ -15,12 +18,17 @@ namespace MoneyGo.Controllers
 {
     public class IdentityController : Controller
     {
+
         RepositoryTransacciones repo;
-        public IdentityController(RepositoryTransacciones repo)
+        MailService MailService;
+
+        public IdentityController(RepositoryTransacciones repo, MailService MailService)
         {
             this.repo = repo;
-        }
 
+            this.MailService = MailService;
+        }
+        #region Login y logout
         public IActionResult Login()
         {
             return View();
@@ -43,7 +51,7 @@ namespace MoneyGo.Controllers
                     ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, usr.NombreUsuario));
-                identity.AddClaim(new Claim(ClaimTypes.Email, usr.Email)); 
+                identity.AddClaim(new Claim(ClaimTypes.Email, usr.Email));
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
@@ -57,6 +65,14 @@ namespace MoneyGo.Controllers
                 return RedirectToAction("Index", "Transacciones");
             }
         }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        #endregion
 
         public IActionResult Register()
         {
@@ -72,9 +88,13 @@ namespace MoneyGo.Controllers
 
         public IActionResult Logout()
         {
-           //ELiminar la sesión, pero como?
+            //ELiminar la sesión, pero como?
 
             return RedirectToAction("Index", "Landing");
         }
+
+       
+
+      
     }
 }
