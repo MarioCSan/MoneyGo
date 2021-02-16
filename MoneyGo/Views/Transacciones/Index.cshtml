@@ -223,7 +223,7 @@
 
                     <div class="modal-footer">
                         <button type="submit" value="Create" class="btn btn-primary">Crear</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -254,7 +254,7 @@
 
             var ctx = document.getElementById('canvas').getContext('2d');
             var myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'doughnut',
                 data: {
                     labels: [...transacciones],
                     datasets: [{
