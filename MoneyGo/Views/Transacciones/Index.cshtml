@@ -52,11 +52,12 @@
 
 
     <div class="mb-2">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
             Nueva transaccion
         </button>
     </div>
-    <div class="d-flex justify-content-end">
+    <br />
+    <div class="d-flex justify-content-end table-responsive">
         @if (Model == null)
         {
             <br />
@@ -68,8 +69,8 @@
         {
 
 
-            <div class="table-responsive">
-                <table class="table-responsive-sm table-bordered table-hover">
+            <div class="container">
+                <table class="table  table-bordered table-hover">
                     <thead>
                         <tr>
 
@@ -77,7 +78,7 @@
                                 Cantidad
                             </th>
                             <th>
-                                Tipo de ingreso
+                                Tipo
                             </th>
                             <th>
                                 Concepto
@@ -169,13 +170,10 @@
             </div>
         }
     </div>
-
-    <div>
-        @ViewData["json"]
-    </div>
+    <hr />
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <canvas id="canvas" width="400" height="400"></canvas>
+            <canvas id="canvas" width="200" height="200"></canvas>
         </div>
     </div>
 
@@ -237,38 +235,56 @@
 
     <script>
         $(document).ready(function () {
-             let json = @Html.Raw(ViewData["json"]);
+            let json = @Html.Raw(ViewData["json"]);
 
-            var jsonfile = {
-                "jsonarray": json
-            }
-            console.log(jsonfile)
-            var labels = jsonfile.jsonarray[0].map(function (e) {
-                return e[0];
+            let transacciones = [];
+            let cantidad = [];
+            let tipo = []
+
+            json.map((item) => {
+                cantidad.push(item.Cantidad);
+                transacciones.push(item.FechaTransaccion);
+                tipo.push(item.TipoTransaccion);
             });
-
-            var data = jsonfile.jsonarray[0].map(function (e) {
-                return e[1];
-            });
-
 
             var ctx = document.getElementById('canvas').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'line',
+            var myChart = new Chart(ctx, {
+                type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: [...transacciones],
                     datasets: [{
-                        backgroundColor: 'rgb(129, 198, 2228)',
-                        borderColor: 'rgb(0, 150, 215)',
-                        data: data
+                        label: 'Cantidad transacción',
+                        data: [...cantidad],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
                     }]
                 },
                 options: {
-                    responsive: 'true',
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
             });
         });
-
 
         window.setTimeout(function () {
             $("#inicio").fadeTo(500, 0).slideUp(500, function () {

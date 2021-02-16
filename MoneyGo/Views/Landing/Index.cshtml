@@ -1,19 +1,18 @@
 ﻿@section Style {
-    <link href="~/css/landing-page.min.css" rel="stylesheet">
+    @*<link href="~/css/landing-page.min.css" rel="stylesheet">*@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900|Playfair+Display:400,700,900 " rel="stylesheet">
 
-    <link href="~/css/landing/style.css" rel="stylesheet" />
-    <link href="~/css/landing/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/landing/aos.css" rel="stylesheet" />
     <link href="~/css/landing/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="~/css/landing/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="~/css/landing/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/landing/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/landing/jquery.fancybox.min.css" rel="stylesheet" />
     <link href="~/css/landing/magnific-popup.css" rel="stylesheet" />
     <link href="~/css/landing/mediaelementplayer.css" rel="stylesheet" />
     <link href="~/css/landing/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/css/landing/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="~/css/landing/aos.css" rel="stylesheet" />
-
+    <link href="~/css/landing/style.css" rel="stylesheet" />
     <link href="~/css/bootstrap-grid.css" rel="stylesheet" />
     <link href="~/css/bootstrap-reboot.css" rel="stylesheet" />
     <link href="~/css/bootstrap.css" rel="stylesheet" />
@@ -39,6 +38,7 @@ else
         </div>
 
 
+
         <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
 
             <div class="container">
@@ -46,26 +46,7 @@ else
 
                     <div class="col-6 col-xl-2">
                         <h1 class="mb-0 site-logo m-0 p-0"><a asp-action="Index" asp-controller="Landing">MoneyGo</a></h1>
-                        
                     </div>
-
-                    <div class="col-12 col-md-10 d-none d-xl-block">
-                        <nav class="site-navigation position-relative text-right" role="navigation">
-
-                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                                @*<li><a href="#home-section" class="nav-link">Inicio</a></li>
-                                <li><a href="#properties-section" class="nav-link">Properties</a></li>
-                                <li><a href="#agents-section" class="nav-link">Agents</a></li>
-                                <li><a href="#about-section" class="nav-link">About</a></li>
-                                <li><a href="#news-section" class="nav-link">News</a></li>*@
-                                <li><a asp-action="Index" asp-controller="Transacciones">Iniciar Sesión</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-
-                    <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><i class="far fa-eye"></i></a></div>
-
                 </div>
             </div>
 
@@ -98,7 +79,7 @@ else
         </div>
 
 
-      
+
 
         <section class="site-section border-bottom bg-light" id="services-section">
             <div class="container">
@@ -114,7 +95,7 @@ else
                             <div>
                                 <h3>Almacenar transacciones</h3>
                                 <p>Guarde sus gastos y sus ingresos</p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -124,7 +105,7 @@ else
                             <div>
                                 <h3>Controle sus gastos</h3>
                                 <p>Puede controlar sus gastos de una manera sencilla</p>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -134,7 +115,7 @@ else
                             <div>
                                 <h3>Invierta en sus ahorros</h3>
                                 <p>Ahorre y reinviertalo.</p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -162,7 +143,7 @@ else
                         </blockquote>
 
                         <figure class="mb-4 d-flex align-items-center justify-content-center">
-                            <div><img src="images/person_3.jpg" alt="Image" class="w-50 img-fluid mb-3"></div>
+                            
                             <p>John Smith</p>
                         </figure>
                     </div>
@@ -174,7 +155,7 @@ else
                             <p>&ldquo;Gracias a MoneyGo he consegudo controlar los gastos.&rdquo;</p>
                         </blockquote>
                         <figure class="mb-4 d-flex align-items-center justify-content-center">
-                          
+
                             <p>Zaira Espinal</p>
                         </figure>
 
@@ -188,7 +169,7 @@ else
                             <p>&ldquo;Llegué pensando que daban dinero y me quede para controlar mis finanzas..&rdquo;</p>
                         </blockquote>
                         <figure class="mb-4 d-flex align-items-center justify-content-center">
-                         
+
                             <p>Robert Spears</p>
                         </figure>
 
@@ -203,7 +184,7 @@ else
                             <p>&ldquo;Gracias a MOneyGo puedo controlar donde se van los gastos y gastar más dinero de los contribuyentes sin miedo.&rdquo;</p>
                         </blockquote>
                         <figure class="mb-4 d-flex align-items-center justify-content-center">
-                            
+
                             <p>Gobierno de España</p>
                         </figure>
 
