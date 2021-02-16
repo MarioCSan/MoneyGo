@@ -238,5 +238,13 @@ namespace MoneyGo.Repositories
             return email;
         }
         #endregion
+
+        public string GenerarToken()
+        {
+            Random rnd = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            
+            return new string(Enumerable.Repeat(chars, 16).Select(s => s[rnd.Next(s.Length)]).ToArray());
+        }
     }
 }

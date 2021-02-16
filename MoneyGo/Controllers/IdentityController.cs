@@ -80,21 +80,11 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
+        public IActionResult Register(String nombre, String nombreUsuario, String password, String email)
         {
             this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
             return RedirectToAction("Index", "Landing");
         }
 
-        public IActionResult Logout()
-        {
-            //ELiminar la sesión, pero como?
-
-            return RedirectToAction("Index", "Landing");
-        }
-
-       
-
-      
     }
 }

@@ -105,11 +105,11 @@ namespace MoneyGo.Controllers
             Usuario usuario = this.repo.GetUsuarioEmail(email);
             if (usuario != null)
             {
-                // logica envio emailñ con token de recuperación
+                // Token => cadena aleatorea de 16 caracteres numerocos??
 
-                var token = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier); // await Usuario.GeneratePasswordResetTokenAsync(usuario);
+                var token = this.repo.GenerarToken(); // await Usuario.GeneratePasswordResetTokenAsync(usuario);
                 var link = Url.Action("ResetPassword", "Landing", new { token, email = email }, Request.Scheme);
-                this.mailService.SendEmailRecuperacion(email, link);
+                this.mailService.SendEmailRecuperacion(email, link); 
                 ViewData["MSG"] = "Se ha enviado un email de recuperación. Revise su correo.";
 
             }
