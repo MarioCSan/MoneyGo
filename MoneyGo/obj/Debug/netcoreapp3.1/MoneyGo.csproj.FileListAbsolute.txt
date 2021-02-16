@@ -21,8 +21,6 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.TagHelpers.input.cache
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.TagHelpers.output.cache
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.RazorCoreGenerate.cache
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -35,7 +33,6 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.pdb
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.genruntimeconfig.cache
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.csproj.CopyComplete
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -158,3 +155,4 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\RecuperarPassword.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\ResetPassword.cshtml.g.cs
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_footer.cshtml.g.cs
