@@ -38,7 +38,7 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> Login(String email, String password)
         {
             Usuario usr = this.repo.ValidarUsuario(email, password);
-
+           
             if (usr == null)
             {
                 ViewData["MENSAJE"] = "usuario o password incorrecto";
@@ -52,6 +52,7 @@ namespace MoneyGo.Controllers
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, usr.NombreUsuario));
                 identity.AddClaim(new Claim(ClaimTypes.Email, usr.Email));
+                identity.AddClaim(new Claim(ClaimTypes.UserData, usr.ImagenUsuario));
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
@@ -59,8 +60,6 @@ namespace MoneyGo.Controllers
                     ExpiresUtc = DateTime.Now.AddMinutes(5)
                 });
 
-
-                HttpContext.Session.SetInt32("user", usr.IdUsuario);
                 HttpContext.Session.SetString("img", usr.ImagenUsuario);
                 return RedirectToAction("Index", "Transacciones");
             }
@@ -69,7 +68,7 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Landing");
         }
 
         #endregion
@@ -80,11 +79,11 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(String nombre, String nombreUsuario, String password, String email)
+        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
         {
             this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
             return RedirectToAction("Index", "Landing");
         }
-
+      
     }
 }

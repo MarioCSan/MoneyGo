@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MoneyGo.Controllers
@@ -27,7 +28,7 @@ namespace MoneyGo.Controllers
         public IActionResult Index()
         {
 
-            int id = (int)HttpContext.Session.GetInt32("user");
+            int id = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             Usuario user = this.repo.getDataUsuario(id);
 
             if (TempData["MSG"] != null)

@@ -1,10 +1,9 @@
-﻿
-@{
-    String session = Context.Session.GetString("user");
-    String userImg = Context.Session.GetString("img");
+﻿@{
+    String session = Context.User.FindFirstValue(ClaimTypes.Name);
+    String userImg = Context.User.FindFirstValue(ClaimTypes.UserData);
 }
 
-@if (session != null)
+@if (Context.User.FindFirst(ClaimTypes.NameIdentifier) != null)
 {
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -16,28 +15,17 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (session == null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Landing" asp-action="Index">Inicio</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Transacciones" asp-action="Index">Inicio</a>
-                            </li>
-                        }
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Transacciones" asp-action="Index">Inicio</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
                     <ul class="navbar-nav flex-grow-1 float-right">
-                        @if (session != null)
-                        {
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle m-xl-n2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (userImg.ToLower() == "vacio")
+                                @if (userImg == null)
                                 {
                                     <img src="~/Images/UserLogo.svg" class="img-thumbnail " style="width:25%" alt="Imagen del usuario" />
                                 }
@@ -46,18 +34,14 @@
                                     <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:2rem; height:2rem; border-radius:50%" alt="Imagen del usuario" />
                                 }
                             </a>
-                          
-                           
+
+
                             <div class="dropdown-menu" aria-labelledby="Menú">
                                 <a asp-action="Index" asp-controller="Management" class="dropdown-item">Opciones</a>
                                 <a class="text-danger dropdown-item" asp-action="Logout" asp-controller="Identity">Cerrar sesión</a>
                             </div>
                         </li>
 
-
-
-                          
-                        }
                     </ul>
 
                 </div>
