@@ -24,7 +24,7 @@ namespace MoneyGo.Controllers
         }
 
         [AuthorizeUsuarios]
-        public IActionResult Index(int? posicion, List<Transacciones>? trns)
+        public IActionResult Index(int? posicion)
         {
 
             if (posicion == null)
@@ -36,7 +36,7 @@ namespace MoneyGo.Controllers
             int registros = 0;
            
 
-            var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            int user = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(posicion.Value, user, ref registros);
 
             var json = HelperToolkit.SerializeJsonObject(transacciones);
@@ -49,7 +49,7 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult NuevaTransaccion(float cantidad, String tipoTransaccion, String Concepto)
+        public IActionResult NuevaTransaccion(Double cantidad, String tipoTransaccion, String Concepto)
         {
             String date = DateTime.Now.ToShortTimeString();
             DateTime fecha = Convert.ToDateTime(date);
@@ -67,7 +67,7 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult ModificarTransaccion(int idtransaccion, float cantidad, string tipoTransaccion, string concepto)
+        public IActionResult ModificarTransaccion(int idtransaccion, Double cantidad, string tipoTransaccion, string concepto)
         {
             this.repo.ModificarTransaccion(idtransaccion, cantidad, tipoTransaccion, concepto);
             TempData["MENSAJE"] = "Transaccion Modificada correctamente";

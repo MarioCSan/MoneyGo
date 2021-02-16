@@ -46,6 +46,10 @@ namespace MoneyGo.Controllers
             }
             else
             {
+                if (usr.ImagenUsuario == null)
+                {
+                    usr.ImagenUsuario = "UserLogo.svg";
+                }
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
                     ClaimTypes.Name, ClaimTypes.Role);

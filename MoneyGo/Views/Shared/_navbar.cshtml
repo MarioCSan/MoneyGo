@@ -26,7 +26,7 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (userImg == null)
+                                @if (userImg == null || userImg=="")
                                 {
                                     <img src="~/Images/UserLogo.svg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
                                 }

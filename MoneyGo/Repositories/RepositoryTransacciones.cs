@@ -82,7 +82,7 @@ namespace MoneyGo.Repositories
             return this.context.Transacciones.Where(z => z.IdTransaccion == IdTransaccion).FirstOrDefault();
         }
 
-        public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, String Concepto, DateTime Fecha)
+        public void NuevaTransaccion(int IdUsuario, Double Cantidad, String Tipo, String Concepto, DateTime Fecha)
         {
             var consulta = from datos in this.context.Transacciones
                            select datos.IdTransaccion;
@@ -102,7 +102,7 @@ namespace MoneyGo.Repositories
 
         }
 
-        public void ModificarTransaccion(int idtransaccion, float cantidad, String tipo, String concepto)
+        public void ModificarTransaccion(int idtransaccion, Double cantidad, String tipo, String concepto)
         {
             Transacciones transaccion = this.BuscarTransacciones(idtransaccion);
             transaccion.Cantidad = cantidad;
