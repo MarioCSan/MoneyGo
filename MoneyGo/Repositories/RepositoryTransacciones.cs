@@ -102,6 +102,16 @@ namespace MoneyGo.Repositories
 
         }
 
+        public void ModificarTransaccion(int idtransaccion, float cantidad, String tipo, String concepto)
+        {
+            Transacciones transaccion = this.BuscarTransacciones(idtransaccion);
+            transaccion.Cantidad = cantidad;
+            transaccion.TipoTransaccion = tipo;
+            transaccion.Concepto = concepto;
+           
+            this.context.SaveChanges();
+        }
+
         public void EliminarTransaccion(int idtransaccion)
         {
             //RGPD.¿Se que almacenar los datos X tiempo?¿Necesario campo extra a nulo o booleano para que no se muestre?
@@ -122,6 +132,34 @@ namespace MoneyGo.Repositories
             numerotransacciones = Convert.ToInt32(pamregistros.Value);
             return transacciones;
         }
+
+
+        public List<Transacciones> GetTransaccionesAsc(int idusuario, string tipoTransaccion)
+        {
+            var consulta = (from datos in this.context.Transacciones
+                           where datos.IdUsuario == idusuario && datos.TipoTransaccion == "Ingreso"
+                           select datos).OrderBy(x=>x.Cantidad);
+
+            if (consulta.Count() == 0)
+            {
+                return null;
+            }
+            return consulta.ToList();
+        }
+
+        public List<Transacciones> GetTransaccionesDesc(int idusuario, string tipoTransaccion)
+        {
+            var consulta = (from datos in this.context.Transacciones
+                            where datos.IdUsuario == idusuario && datos.TipoTransaccion == "Ingreso"
+                            select datos).OrderByDescending(x => x.Cantidad);
+
+            if (consulta.Count() == 0)
+            {
+                return null;
+            }
+            return consulta.ToList();
+        }
+
 
         #endregion
 

@@ -24,7 +24,7 @@ namespace MoneyGo.Controllers
         }
 
         [AuthorizeUsuarios]
-        public IActionResult Index(int? posicion)
+        public IActionResult Index(int? posicion, List<Transacciones>? trns)
         {
 
             if (posicion == null)
@@ -32,22 +32,26 @@ namespace MoneyGo.Controllers
                 posicion = 1;
                 
             }
-            
+
             int registros = 0;
            
 
             var user = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(posicion.Value, user, ref registros);
+
+            var json = HelperToolkit.SerializeJsonObject(transacciones);
+
             ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);
             ViewData["ID"] = user;
             ViewData["NUMEROREGISTROS"] = registros;
+            ViewData["json"] = json;
             return View(transacciones);
         }
 
         [HttpPost]
         public IActionResult NuevaTransaccion(float cantidad, String tipoTransaccion, String Concepto)
         {
-            String date = DateTime.Now.ToShortDateString();
+            String date = DateTime.Now.ToShortTimeString();
             DateTime fecha = Convert.ToDateTime(date);
             int IdUsuario = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
@@ -60,6 +64,24 @@ namespace MoneyGo.Controllers
             this.repo.EliminarTransaccion(idtransaccion);
             TempData["MENSAJE"] = "Transaccion eliminada correctamente";
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult ModificarTransaccion(int idtransaccion, float cantidad, string tipoTransaccion, string concepto)
+        {
+            this.repo.ModificarTransaccion(idtransaccion, cantidad, tipoTransaccion, concepto);
+            TempData["MENSAJE"] = "Transaccion Modificada correctamente";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult OrdenarIngresoAsc()
+        {
+            int IdUsuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).ToString());
+
+            List<Transacciones> transacciones = this.repo.GetTransaccionesAsc(IdUsuario, "Ingresos");
+
+            return View(transacciones);
+
         }
     }
 }

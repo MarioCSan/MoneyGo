@@ -1,6 +1,7 @@
 ﻿@{
     String session = Context.User.FindFirstValue(ClaimTypes.Name);
     String userImg = Context.User.FindFirstValue(ClaimTypes.UserData);
+    string imgSession = Context.Session.GetString("img");
 }
 
 @if (Context.User.FindFirst(ClaimTypes.NameIdentifier) != null)
@@ -24,15 +25,20 @@
                     <ul class="navbar-nav flex-grow-1 float-right">
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle m-xl-n2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if (userImg == null)
                                 {
-                                    <img src="~/Images/UserLogo.svg" class="img-thumbnail " style="width:25%" alt="Imagen del usuario" />
+                                    <img src="~/Images/UserLogo.svg" class="img-thumbnail float-right" style="width:25%" alt="Imagen del usuario" />
+                                }
+                                else if (imgSession != null)
+                                {
+                                    <img src="~/Images/@imgSession" class="img-thumbnail float-right" style="width:3rem; height:3rem; border-radius:50%" alt="Imagen del usuario" />
                                 }
                                 else
                                 {
-                                    <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:2rem; height:2rem; border-radius:50%" alt="Imagen del usuario" />
+                                    <img src="~/Images/@userImg" class="img-thumbnail float-right" style="width:3rem; height:3rem; border-radius:50%" alt="Imagen del usuario" />
                                 }
+
                             </a>
 
 

@@ -152,7 +152,7 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Management\Index.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Identity\Login.cshtml.g.cs
-C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\RecuperarPassword.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\ResetPassword.cshtml.g.cs
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_footer.cshtml.g.cs
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\Razor\Views\Landing\PoliticaCookies.cshtml.g.cs

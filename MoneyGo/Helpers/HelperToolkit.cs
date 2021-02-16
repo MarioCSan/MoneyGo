@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,25 @@ namespace MoneyGo.Helpers
                 }
             }
             return false;
+        }
+
+        public static String SerializeJsonObject(Object objeto)
+        {
+            String respuesta = JsonConvert.SerializeObject(objeto);
+            return respuesta;
+        }
+
+        //MEtodo que recibira un String json y devolvera un json
+        public static Object DeserializeJsonObject(String json, Type type)
+        {
+            Object respuesta = JsonConvert.DeserializeObject(json, type);
+            return respuesta;
+        }
+
+
+        internal static T DeserializeJsonObject<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }
