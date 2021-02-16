@@ -50,7 +50,7 @@ namespace MoneyGo.Controllers
 
         public IActionResult ChangePassword(String oldpassword, String newpassword, String passwordconfirm)
         {
-            String email = this.repo.GetEmail((int)HttpContext.Session.GetInt32("user"));
+            String email = HttpContext.User.FindFirstValue(ClaimTypes.Email);
             Usuario user = this.repo.ValidarUsuario(email, oldpassword);
 
             if (user != null && newpassword.Equals(passwordconfirm))
@@ -61,7 +61,7 @@ namespace MoneyGo.Controllers
             }
             else if (user == null)
             {
-                user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
+                user = this.repo.getDataUsuario(int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)));
                 ViewData["ERR"] = "La contraseña antigua no es correcta";
                 return RedirectToAction("Index", "Landing");
             }
@@ -78,7 +78,9 @@ namespace MoneyGo.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IFormFile imagen)
         {
-            Usuario user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
+            int id = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Usuario user = this.repo.getDataUsuario(id);
+              
             if (imagen != null)
             {
 
@@ -91,7 +93,7 @@ namespace MoneyGo.Controllers
                     {
                         await imagen.CopyToAsync(Stream);
                     }
-                    this.repo.UpdateImagen((int)HttpContext.Session.GetInt32("user"), filename);
+                    this.repo.UpdateImagen(id, filename);
                 }
                 ViewData["MSG"] = "Imagen cambiada con exito";
 

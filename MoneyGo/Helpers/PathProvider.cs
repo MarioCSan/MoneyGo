@@ -32,7 +32,7 @@ namespace MoneyGo.Helpers
             }
             else if (folder == Folders.Images)
             {
-                carpeta = "images";
+                carpeta = "Images";
             }
             else if (folder == Folders.tmp)
             {
