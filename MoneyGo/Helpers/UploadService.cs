@@ -20,8 +20,7 @@ namespace MoneyGo.Helpers
 
         public async Task<String> UploadFileAsync(IFormFile fichero, Folders folder)
         {
-            //Task => void. Task<??>
-
+            
             String filename = HelperToolkit.Normalize(fichero.FileName);
             String path = this.pathProvider.MapPath(filename, Folders.Images);
 
@@ -29,7 +28,10 @@ namespace MoneyGo.Helpers
             {
                 using (var Stream = new FileStream(path, FileMode.Create))
                 {
-                    await fichero.CopyToAsync(Stream);
+                    if (HelperToolkit.ValidarFormatoImagen(filename.ToLower()))
+                    {
+                        await fichero.CopyToAsync(Stream);
+                    }
                 }
             }
 

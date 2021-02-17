@@ -73,7 +73,6 @@
                 <table class="table  table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>
                                 Cantidad
                             </th>
@@ -98,7 +97,6 @@
                             var midMod = "modificar" + trns.IdTransaccion;
 
                             <tr>
-                                <td>@trns.IdTransaccion</td>
                                 <td>@trns.Cantidad</td>
                                 <td>@trns.TipoTransaccion</td>
                                 <td>@trns.Concepto</td>
@@ -146,7 +144,7 @@
                                             Se va a modificar esta operación.
 
                                             <form method="post" asp-action="ModificarTransaccion">
-                                                <input type="number" value="@trns.IdTransaccion" name="idtransaccion" />
+                                                <input type="number" value="@trns.IdTransaccion" name="idtransaccion" readonly hidden />
                                                 <br />
                                                 <label>Cantidad</label>
                                                 <input class="form-control" type="number" step="any" value="@trns.Cantidad" name="cantidad" placeholder="@trns.Cantidad" />
@@ -162,9 +160,10 @@
                                                 <input class="form-control" type="text" value="@trns.Concepto" name="concepto" placeholder="@trns.Concepto" />
 
                                                 <hr />
-                                                <button type="submit" class="btn btn-danger">Modificar</button>
+                                                <button type="button" class="btn btn-Primary float-right" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-danger float-lg-right">Modificar</button>
                                             </form>
-                                            <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -176,12 +175,15 @@
         }
     </div>
     <hr />
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <canvas id="canvas" width="200" height="200"></canvas>
+    <div class="container">
+        <div class="row col-md-6 float-left">
+            <canvas id="canvas"></canvas>
+           
+        </div>
+        <div class="row">
+            <canvas id="chart2"></canvas>
         </div>
     </div>
-
 
 </div>
 
@@ -202,7 +204,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Cantidad: </label>
-                        <input type="number" step="any" name="Cantidad" class="form-control" /> €
+                        <input type="number" step="any" name="Cantidad" class="form-control" placeholder="€"/> 
                         <span class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -223,7 +225,7 @@
 
                     <div class="modal-footer">
                         <button type="submit" value="Create" class="btn btn-primary">Crear</button>
-                        <button type="button" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -244,7 +246,7 @@
 
             let transacciones = [];
             let cantidad = [];
-            let tipo = []
+            let tipo = [];
 
             json.map((item) => {
                 cantidad.push(item.Cantidad);
@@ -254,9 +256,9 @@
 
             var ctx = document.getElementById('canvas').getContext('2d');
             var myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
-                    labels: [...transacciones],
+                    labels: [...tipo],
                     datasets: [{
                         label: 'Cantidad transacción',
                         data: [...cantidad],
@@ -289,7 +291,47 @@
                     }
                 }
             });
+
+            var canvas = document.getElementById('chart2').getContext('2d');
+            var chart = new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: [...transacciones],
+                    datasets: [{
+                        label: 'Fecha transacción / cantidad',
+                        data: [...cantidad],
+                        backgroundColor: [
+
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
         });
+
+
 
         window.setTimeout(function () {
             $("#inicio").fadeTo(500, 0).slideUp(500, function () {

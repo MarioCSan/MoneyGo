@@ -44,7 +44,7 @@ namespace MoneyGo.Controllers
                 if (valido)
                 {
                     this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-                    ViewData["MENSAJE"] = "Revise la bandeja de entrada de su email.";
+                    return RedirectToAction("Index", "Transacciones");
                 }
                 else
                 {

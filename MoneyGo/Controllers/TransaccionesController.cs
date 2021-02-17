@@ -49,7 +49,7 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult NuevaTransaccion(Double cantidad, String tipoTransaccion, String Concepto)
+        public IActionResult NuevaTransaccion(float cantidad, String tipoTransaccion, String Concepto)
         {
             String date = DateTime.Now.ToShortTimeString();
             DateTime fecha = Convert.ToDateTime(date);
@@ -67,7 +67,7 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult ModificarTransaccion(int idtransaccion, Double cantidad, string tipoTransaccion, string concepto)
+        public IActionResult ModificarTransaccion(int idtransaccion, float cantidad, string tipoTransaccion, string concepto)
         {
             this.repo.ModificarTransaccion(idtransaccion, cantidad, tipoTransaccion, concepto);
             TempData["MENSAJE"] = "Transaccion Modificada correctamente";
