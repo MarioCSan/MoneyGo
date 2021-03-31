@@ -24,26 +24,14 @@ namespace MoneyGo.Controllers
         }
 
         [AuthorizeUsuarios]
-        public IActionResult Index(int? posicion)
+        public IActionResult Index()
         {
 
-            if (posicion == null)
-            {
-                posicion = 1;
-                
-            }
-
-            int registros = 0;
-           
-
             int user = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(posicion.Value, user, ref registros);
+            List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
             var json = HelperToolkit.SerializeJsonObject(transacciones);
 
-            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);
-            ViewData["ID"] = user;
-            ViewData["NUMEROREGISTROS"] = registros;
             ViewData["json"] = json;
             return View(transacciones);
         }

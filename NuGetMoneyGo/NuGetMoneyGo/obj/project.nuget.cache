@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9bleDCej898QfwohOa7doCmpSMSDG+s4rkeIA+glrfmCGXBEPM5X9PX8JO0ONPKupJ84yl0uooScUvnZQSzmIA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\NuGetMoneyGo\\NuGetMoneyGo\\NuGetMoneyGo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mario\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
