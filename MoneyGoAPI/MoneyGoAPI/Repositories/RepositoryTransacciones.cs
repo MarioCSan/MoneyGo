@@ -138,6 +138,12 @@ namespace MoneyGoAPI.Repositories
         #endregion
 
         #region usuariosLogin
+
+        public Usuarios ExisteUsuario(String Email, Byte[] password)
+        {
+            return this.context.Usuarios.SingleOrDefault(x => x.Email == Email && x.Password == password);
+        }
+
         public bool BuscarEmail(String email)
         {
             bool emailValido = false;

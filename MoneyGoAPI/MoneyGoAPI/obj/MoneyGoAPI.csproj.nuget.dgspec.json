@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {}
+    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {
+    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
+        "projectUniqueName": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
         "projectName": "MoneyGoAPI",
-        "projectPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
+        "projectPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
         "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\obj\\",
+        "outputPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -44,6 +44,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.13, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
@@ -51,6 +59,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.10.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
