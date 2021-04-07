@@ -42,5 +42,24 @@ namespace MoneyGoAPI.Controllers
             this.repo.NuevaTransaccion(usuario.IdUsuario, cantidad, tipoTransaccion, Concepto, date);
             return RedirectToAction("GetTransaccionesUsuario");
         }
+
+        [HttpPut]
+        [Route("[action]/{id}")]
+        [Authorize]
+        public ActionResult<Transacciones> Modificar(int idtransaccion, float cantidad, String tipoTransaccion, String Concepto)
+        {
+          
+            this.repo.ModificarTransaccion(idtransaccion, cantidad, tipoTransaccion, Concepto);
+            return RedirectToAction("GetTransaccionesUsuario");
+        }
+
+        [HttpDelete]
+        [Route("[action]")]
+        [Authorize]
+        public ActionResult<Transacciones> Eliminar(int idtransaccion)
+        {
+            this.repo.EliminarTransaccion(idtransaccion);
+            return RedirectToAction("GetTransaccionesUsuario");
+        }
     }
 }

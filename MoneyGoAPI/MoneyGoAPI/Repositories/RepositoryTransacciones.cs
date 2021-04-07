@@ -94,18 +94,6 @@ namespace MoneyGoAPI.Repositories
             this.context.SaveChanges();
         }
 
-        //public List<Transacciones> GetTransaccionesPaginacion(int posicion, int idusuario, ref int numerotransacciones)
-        //{
-        //    String sql = "PAGINACIONTRANSACCIONES @POSICION, @IDUSUARIO, @REGISTROS OUT";
-        //    SqlParameter pamposicion = new SqlParameter("@POSICION", posicion);
-        //    SqlParameter pamusuario = new SqlParameter("@IDUSUARIO", idusuario);
-        //    SqlParameter pamregistros = new SqlParameter("@REGISTROS", -1);
-        //    pamregistros.Direction = System.Data.ParameterDirection.Output;
-
-        //    List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario, pamregistros).ToList();
-        //    numerotransacciones = Convert.ToInt32(pamregistros.Value);
-        //    return transacciones;
-        //}
 
 
         public List<Transacciones> GetTransaccionesAsc(int idusuario, string tipoTransaccion)
@@ -255,6 +243,13 @@ namespace MoneyGoAPI.Repositories
 
             string email = user.Email;
             return email;
+        }
+
+        public void EliminarCuenta(int idusuario)
+        {
+            Usuarios user = this.context.Usuarios.Where(z => z.IdUsuario == idusuario).FirstOrDefault();
+            this.context.Usuarios.Remove(user);
+            this.context.SaveChanges();
         }
         #endregion
 
