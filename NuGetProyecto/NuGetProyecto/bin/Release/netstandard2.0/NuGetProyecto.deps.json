@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "NuGetProyecto/1.0.0": {
+      "NuGetProyecto/1.0.1": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "System.ComponentModel.Annotations": "5.0.0"
@@ -33,7 +33,7 @@
     }
   },
   "libraries": {
-    "NuGetProyecto/1.0.0": {
+    "NuGetProyecto/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

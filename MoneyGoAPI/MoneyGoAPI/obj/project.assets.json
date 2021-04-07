@@ -679,6 +679,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "NuGetProyecto/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.ComponentModel.Annotations": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NuGetProyecto.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NuGetProyecto.dll": {}
+        }
+      },
       "runtime.native.System/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2728,6 +2740,18 @@
         "newtonsoft.json.13.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "NuGetProyecto/1.0.0": {
+      "sha512": "vhLUp+ROSphp1rKMH3JFtGbcGYzxniq6AB3NLiVmPq7PK4tZHCUsXfxLzPWsGTBa4lcvCJSA93tQXlJZ6689aw==",
+      "type": "package",
+      "path": "nugetproyecto/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NuGetProyecto.dll",
+        "nugetproyecto.1.0.0.nupkg.sha512",
+        "nugetproyecto.nuspec"
       ]
     },
     "runtime.native.System/4.3.0": {
@@ -6151,6 +6175,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.4",
       "Microsoft.IdentityModel.Tokens >= 6.10.0",
       "Newtonsoft.Json >= 13.0.1",
+      "NuGetProyecto >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.1.1"
     ]
   },
@@ -6221,6 +6246,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "NuGetProyecto": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

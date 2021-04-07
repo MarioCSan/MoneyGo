@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fmb9byhSnETyuj3UNP+LDMRyPLPBjhJOeIDrOPimCWHGutAPL/og1LXYP4W3PRIORBVuHvUSZtYUhAliHj9y4w==",
+  "dgSpecHash": "S8zcZ7rTW2USR0NEG8862mYv7BXyhH3KqYZab9vq7SwtmAb/sh2dOZQBw9d/oQhCwrG6hdHteOuSiUX7pZ7h9Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\mario\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\nugetproyecto\\1.0.0\\nugetproyecto.1.0.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.1\\swashbuckle.aspnetcore.6.1.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.1\\swashbuckle.aspnetcore.swagger.6.1.1.nupkg.sha512",
