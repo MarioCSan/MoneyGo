@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEmpleadoOAuth.Helpers
+namespace MoneyGoAPI.Helpers
 {
     public class HelperToken
     {
@@ -21,8 +21,6 @@ namespace ApiEmpleadoOAuth.Helpers
             this.Audience = configuration["ApiOAuth:Audience"];
             this.SecretKey = configuration["ApiOAuth:SecretKey"];
         }
-
-        //Metodo [ara generar una clave token a partir del secretKey
 
         public SymmetricSecurityKey GetKeyToken()
         {
@@ -53,12 +51,14 @@ namespace ApiEmpleadoOAuth.Helpers
         //Metodo Actiion para las opciones de autenticacion
         public Action<AuthenticationOptions> GetAuthOptions()
         {
-            Action<AuthenticationOptions> authoptions = new Action<AuthenticationOptions>(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            });
+            Action<AuthenticationOptions> authoptions =
+                new Action<AuthenticationOptions>(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                });
             return authoptions;
         }
     }

@@ -23,9 +23,14 @@ namespace MoneyGoAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Transacciones>> GetTransaccionesUsuario(int id)
+        [Authorize]
+        public ActionResult<List<Transacciones>> GetTransaccionesUsuario()
         {
-            return this.repo.GetTransacciones(id);
+            List<Claim> claims = HttpContext.User.Claims.ToList();
+            String jsonusuario = claims.SingleOrDefault(x => x.Type == "UserData").Value;
+
+            Usuarios usuario = JsonConvert.DeserializeObject<Usuarios>(jsonusuario);
+            return this.repo.GetTransacciones(usuario.IdUsuario);
         }
 
         [HttpPost]

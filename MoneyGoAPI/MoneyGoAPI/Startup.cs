@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MoneyGo.Helpers;
 using MoneyGoAPI.Data;
+using MoneyGoAPI.Helpers;
 using MoneyGoAPI.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,13 @@ using System.Threading.Tasks;
 namespace MoneyGoAPI
 {
     public class Startup
-    {
+    {  public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+      
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -39,7 +40,7 @@ namespace MoneyGoAPI
             services.AddSingleton<MailService>();
             //services.AddSingleton<UploadService>();
             services.AddSingleton<PathProvider>();
-
+           
 
             services.AddSwaggerGen(options =>
             {
@@ -47,9 +48,14 @@ namespace MoneyGoAPI
                 {
                     Title = "API CRUD Departamentos Core",
                     Version = "v1",
-                    Description = "OPen API"
+                    Description = "Open API"
                 });
             });
+            services.AddTransient<HelperToken>();
+            HelperToken helper = new HelperToken(Configuration);
+            services.AddAuthentication(helper.GetAuthOptions())
+               .AddJwtBearer(helper.GetJwtBearerOptions());
+            
             services.AddControllers();
         }
 

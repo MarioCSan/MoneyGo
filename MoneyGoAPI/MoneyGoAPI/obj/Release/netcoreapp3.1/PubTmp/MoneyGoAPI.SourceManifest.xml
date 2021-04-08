@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
+<<<<<<< HEAD
   <IisApp path="C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+=======
+  <IisApp path="C:\Users\AlumnoMCSD\Documents\0-master\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+>>>>>>> 6dc6b426f146a458e8fac50b26de4c9f89e24115
 </sitemanifest>
