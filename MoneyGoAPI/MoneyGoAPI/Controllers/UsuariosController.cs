@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Helpers;
 using MoneyGoAPI.Models;
@@ -27,6 +28,7 @@ namespace MoneyGoAPI.Controllers
 
         [HttpGet]
         [Route("[action]")]
+        [Authorize]
         public ActionResult<Usuarios> GetDataUsuario()
         {
             List<Claim> claims = HttpContext.User.Claims.ToList();
@@ -38,6 +40,7 @@ namespace MoneyGoAPI.Controllers
 
         [HttpPut]
         [Route("[action]")]
+        [Authorize]
         public ActionResult<Usuarios> ModificarPassword(Usuarios usuario, String password)
         {
 
@@ -47,6 +50,7 @@ namespace MoneyGoAPI.Controllers
 
         [HttpPut]
         [Route("[action]")]
+        [Authorize]
         public async Task<ActionResult<Usuarios>> ModificarImagenAsync(IFormFile imagen)
         {
             List<Claim> claims = HttpContext.User.Claims.ToList();
@@ -69,6 +73,7 @@ namespace MoneyGoAPI.Controllers
 
         [HttpDelete]
         [Route("[action]")]
+        [Authorize]
         public ActionResult<Usuarios> EliminarCuenta()
         {
             List<Claim> claims = HttpContext.User.Claims.ToList();
