@@ -51,6 +51,7 @@ namespace MoneyGoAPI
                     Description = "Open API"
                 });
             });
+
             services.AddTransient<HelperToken>();
             HelperToken helper = new HelperToken(Configuration);
             services.AddAuthentication(helper.GetAuthOptions())

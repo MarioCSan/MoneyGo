@@ -22,8 +22,8 @@ namespace MoneyGoAPI.Controllers
             this.repo = repo;
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public ActionResult<List<Transacciones>> GetTransaccionesUsuario()
         {
             List<Claim> claims = HttpContext.User.Claims.ToList();

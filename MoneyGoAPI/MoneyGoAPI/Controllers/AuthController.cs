@@ -40,17 +40,17 @@ namespace MoneyGoAPI.Controllers
             else
             {
                 //El usuario o que queramos se almacena dentro del tokem mediante Claim. Claim permite almacenar datos por Key, Value
-                String empleadojson = JsonConvert.SerializeObject(usuario);
+                String usuariojson = JsonConvert.SerializeObject(usuario);
                 Claim[] claims = new[]
                 {
-                    new Claim("UserData", empleadojson)
+                    new Claim("UserData", usuariojson)
                 };
 
                 JwtSecurityToken token = new JwtSecurityToken(
                     issuer: this.helperToken.Issuer,
                     audience: this.helperToken.Audience,
                     claims: claims,
-                    expires: DateTime.UtcNow.AddMinutes(10),
+                    expires: DateTime.UtcNow.AddMinutes(25),
                     notBefore: DateTime.UtcNow,
                     signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(this.helperToken.GetKeyToken(), SecurityAlgorithms.HmacSha256));
 

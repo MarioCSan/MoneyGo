@@ -30,6 +30,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
           "Microsoft.IdentityModel.Tokens": "6.10.0",
           "Newtonsoft.Json": "13.0.1",
+          "NuGetProyecto": "1.0.0",
           "Swashbuckle.AspNetCore": "6.1.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
@@ -834,6 +835,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NuGetProyecto/1.0.0": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NuGetProyecto.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/NuGetProyecto.dll": {}
         }
       },
       "runtime.native.System/4.3.0": {
@@ -3453,6 +3468,13 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "NuGetProyecto/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vhLUp+ROSphp1rKMH3JFtGbcGYzxniq6AB3NLiVmPq7PK4tZHCUsXfxLzPWsGTBa4lcvCJSA93tQXlJZ6689aw==",
+      "path": "nugetproyecto/1.0.0",
+      "hashPath": "nugetproyecto.1.0.0.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",
