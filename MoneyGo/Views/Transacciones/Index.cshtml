@@ -2,91 +2,347 @@
 @section navigation{
 
 }
-<h2>Transacciones</h2>
-<h1>Hola mundo, SI ves estio es que has entrado </h1>
-@* Vista principal de la app. ¿Mostrar aquí ya las transacciones o crear un boton para ir? *@
+
+@{
+    int numeropagina = 1;
+    int registros = (int)ViewData["NUMEROREGISTROS"];
+}
+
+
 
 @* Modificar la línea inferior cuando se implementen las sesiones para evitar que se vean las transacciones del resto de usuarios *@
-<a asp-action="NuevaTransaccion" asp-controller="Transacciones" asp-route-id="@ViewData["USUARIO"]" class="btn btn-outline-light">Nueva transaccion</a>
+
 
 @if (ViewData["CADENA"] != null)
 {
     @ViewData["CADENA"]
 }
 
-@if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null  )
+@if (TempData["MENSAJE"] != "" && TempData["MENSAJE"] != null)
 {
-<div class="alert alert-success">
-   @TempData["MENSAJE"]
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+    <div class="alert alert-success">
+        @TempData["MENSAJE"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="msg">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 }
 
-<form method="post">
-    <input type="file" name="filename" class="form-control-file" />
-    <button class="btn btn-success">Probar</button>
-</form>
 
-@if (Model != null)
-{
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Cantidad
-                </th>
-                <th>
-                    Tipo de ingreso
-                </th>
-                <th>
-                    Concepto
-                </th>
-                <th>
-                    Fecha
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Transacciones trns in Model)
-            {
-                var tm = "#myModal" + trns.IdTransaccion;
-                var mid = "myModal" + trns.IdTransaccion;
 
-                <tr>
-                    <td>@trns.Cantidad</td>
-                    <td>@trns.TipoTransaccion</td>
-                    <td>@trns.Concepto</td>
-                    <td>@trns.FechaTransaccion</td>
-                    <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="@tm">
-                            Eliminar
-                        </button>
-                    </td>
+<div class="jumbotron ">
+
+
+    <ul class="list-group list-group-horizontal float-left">
+        @for (int i = 1; i <= registros; i += 4)
+        {
+
+            <li class="list-group-item">
+                <a asp-controller="Transacciones"
+                   asp-action="Index"
+                   asp-route-posicion="@i">
+                    @numeropagina
+                </a>
+            </li>
+
+            numeropagina += 1;
+        }
+    </ul>
 
 
 
-                    <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" style="float: left;" class="close" data-dismiss="modal" aria-hidden="true">&times; Cerrar</button>
-                                    <h4 class="modal-title" id="myModalLabel">Confirmar eliminación</h4>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
-                                </div>
-                                <div class="modal-footer">
-                                    
-                                    @Html.ActionLink("Delete", "Delete", new { idtransaccion = trns.IdTransaccion}, new {_class = "text-danger"})
-                                    <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
+    <div class="mb-2">
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalNueva">
+            Nueva transaccion
+        </button>
+    </div>
+    <br />
+    <div class="d-flex justify-content-end table-responsive">
+        @if (Model == null)
+        {
+            <br />
+
+            <h4>Aún no tiene ninguna transacción, ¿desea crear <a data-toggle="modal" data-target="#exampleModal" asp-action="NuevaTransaccion" asp-controller="Transacciones">una?</a></h4>
+
+        }
+        else
+        {
+
+
+            <div class="container">
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Tipo
+                            </th>
+                            <th>
+                                Concepto
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Transacciones trns in Model)
+                        {
+                            var tmDel = "#myModal" + trns.IdTransaccion;
+                            var midDel = "myModal" + trns.IdTransaccion;
+
+                            var tmMod = "#modificar" + trns.IdTransaccion;
+                            var midMod = "modificar" + trns.IdTransaccion;
+
+                            <tr>
+                                <td>@trns.Cantidad</td>
+                                <td>@trns.TipoTransaccion</td>
+                                <td>@trns.Concepto</td>
+                                <td>@trns.FechaTransaccion</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@tmDel">
+                                        Eliminar
+                                    </button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="@tmMod">
+                                        Modificar
+                                    </button>
+                                </td>
+
+
+                            </tr>
+
+                            <div class="modal fade" id="@midDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Confirmar eliminación</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Seguro que quiere eliminar esta transacción? Una vez eliminada no se podrá recuperar.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form method="post" asp-action="Delete">
+                                                <input type="number" value="@trns.IdTransaccion" name="idtransaccion" hidden />
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                            <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+
+                            <div class="modal fade" id="@midMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Modificar </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Se va a modificar esta operación.
+
+                                            <form method="post" asp-action="ModificarTransaccion">
+                                                <input type="number" value="@trns.IdTransaccion" name="idtransaccion" readonly hidden />
+                                                <br />
+                                                <label>Cantidad</label>
+                                                <input class="form-control" type="number" step="any" value="@trns.Cantidad" name="cantidad" placeholder="@trns.Cantidad" />
+                                                <br />
+                                                <label>Tipo Transaccion</label>
+                                                <br />
+                                                <select name="tipoTransaccion" class="form-control">
+                                                    <option value="Ingreso">Ingreso</option>
+                                                    <option value="Gasto">Gasto</option>
+                                                </select>
+                                                <br />
+                                                <label>Concepto</label><br />
+                                                <input class="form-control" type="text" value="@trns.Concepto" name="concepto" placeholder="@trns.Concepto" />
+
+                                                <hr />
+                                                <button type="button" class="btn btn-Primary float-right" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-danger float-lg-right">Modificar</button>
+                                            </form>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row col-md-6 float-left">
+            <canvas id="canvas"></canvas>
+           
+        </div>
+        <div class="row">
+            <canvas id="chart2"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal nueva transacción -->
+<div class="modal fade" id="modalNueva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva transacción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="NuevaTransaccion">
+                    <div class="form-group">
+                        <input name="IdUsuario" value="@ViewData["ID"]" class="form-control" readonly hidden />
                     </div>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    <div class="form-group">
+                        <label class="control-label">Cantidad: </label>
+                        <input type="number" step="any" name="Cantidad" class="form-control" placeholder="€"/> 
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Tipo de transacción</label>
+                        <select name="TipoTransaccion" class="form-control">
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Gasto">Gasto</option>
+                        </select>
+
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Concepto</label>
+                        <input name="Concepto" class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" value="Create" class="btn btn-primary">Crear</button>
+                        <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            let json = @Html.Raw(ViewData["json"]);
+
+            let transacciones = [];
+            let cantidad = [];
+            let tipo = [];
+
+            json.map((item) => {
+                cantidad.push(item.Cantidad);
+                transacciones.push(item.FechaTransaccion);
+                tipo.push(item.TipoTransaccion);
+            });
+
+            var ctx = document.getElementById('canvas').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [...tipo],
+                    datasets: [{
+                        label: 'Cantidad transacción',
+                        data: [...cantidad],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var canvas = document.getElementById('chart2').getContext('2d');
+            var chart = new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: [...transacciones],
+                    datasets: [{
+                        label: 'Fecha transacción / cantidad',
+                        data: [...cantidad],
+                        backgroundColor: [
+
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+
+
+        window.setTimeout(function () {
+            $("#inicio").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 2000);
+
+        window.setTimeout(function () {
+            $("#msg").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 5000);
+    </script>
 }

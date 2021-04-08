@@ -6,28 +6,47 @@
     <title>@ViewData["Title"] - MoneyGo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/Home.css" />
-   
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    @*<link rel="stylesheet" href="~/css/Home.css" />*@
 
 </head>
 <body>
-    
-    <partial name="_navbar" />
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - MoneyGo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @Html.Partial("_navbar")
+
+    @RenderBody()
+
+    @Html.Partial("_footer")
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> @*SweetAlert2*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/landing/aos.js"></script>
+    <script src="~/js/landing/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/landing/bootstrap.min.js"></script>
+    <script src="~/js/landing/jquery-3.3.1.min.js"></script>
+    <script src="~/js/landing/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/landing/jquery-ui.js"></script>
+    <script src="~/js/landing/jquery.countdown.min.js"></script>
+    <script src="~/js/landing/jquery.easing.1.3.js"></script>
+    <script src="~/js/landing/jquery.fancybox.min.js"></script>
+    <script src="~/js/landing/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/landing/jquery.stellar.min.js"></script>
+    <script src="~/js/landing/jquery.sticky.js"></script>
+    <script src="~/js/landing/main.js"></script>
+    <script src="~/js/landing/mediaelement-and-player.min.js"></script>
+    <script src="~/js/landing/owl.carousel.min.js"></script>
+    <script src="~/js/landing/popper.min.js"></script>
+    <script src="~/js/landing/slick.min.js"></script>
+    <script src="~/js/landing/typed.js"></script>
+    
+
+
     @RenderSection("Scripts", required: false)
     @RenderSection("Style", required: false)
     @RenderSection("navigation", required: false)

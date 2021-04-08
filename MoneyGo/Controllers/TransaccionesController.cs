@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MoneyGo.Filters;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
 using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MoneyGo.Controllers
@@ -13,41 +16,47 @@ namespace MoneyGo.Controllers
     public class TransaccionesController : Controller
     {
         RepositoryTransacciones repo;
+      
         public TransaccionesController(RepositoryTransacciones repo)
         {
             this.repo = repo;
+      
         }
-        public IActionResult Index()
-        {
-            int user = (int)HttpContext.Session.GetInt32("user");
-            ViewData["USUARIO"] = HttpContext.Session.GetInt32("user");
-            ViewData["NOMBRE"] = HttpContext.Session.GetString("nombre");
-            List<Transacciones> transacciones = this.repo.GetTransacciones(user);
 
+        [AuthorizeUsuarios]
+        public IActionResult Index(int? posicion)
+        {
+
+            if (posicion == null)
+            {
+                posicion = 1;
+                
+            }
+
+            int registros = 0;
+           
+
+            int user = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            List<Transacciones> transacciones = this.repo.GetTransaccionesPaginacion(posicion.Value, user, ref registros);
+
+            var json = HelperToolkit.SerializeJsonObject(transacciones);
+
+            ViewData["USUARIO"] = User.FindFirstValue(ClaimTypes.Name);
+            ViewData["ID"] = user;
+            ViewData["NUMEROREGISTROS"] = registros;
+            ViewData["json"] = json;
             return View(transacciones);
         }
-        //prueba del sanitizer
-        [HttpPost]
-        public IActionResult Index(String filename) {
 
-            String sanitize = HelperToolkit.Normalize(filename);
-            ViewData["CADENA"] = sanitize;
-            return View();
-        }
-
-        public IActionResult NuevaTransaccion(int id)
-        {
-            ViewData["user"] = id;
-            return View();
-        }
         [HttpPost]
-        public IActionResult NuevaTransaccion(int IdUsuario, float cantidad, String tipoTransaccion, String Concepto)
+        public IActionResult NuevaTransaccion(float cantidad, String tipoTransaccion, String Concepto)
         {
-            String date = DateTime.Now.ToShortDateString();
+            String date = DateTime.Now.ToShortTimeString();
             DateTime fecha = Convert.ToDateTime(date);
-
+            int IdUsuario = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             this.repo.NuevaTransaccion(IdUsuario, cantidad, tipoTransaccion, Concepto, fecha);
-            return RedirectToAction("Index", new { IdUsuario = IdUsuario});
+            ViewData["MSG"] = "Transacción creada";
+            return RedirectToAction("Index", "Transacciones");
         }
 
         public IActionResult Delete(int idtransaccion)
@@ -55,6 +64,24 @@ namespace MoneyGo.Controllers
             this.repo.EliminarTransaccion(idtransaccion);
             TempData["MENSAJE"] = "Transaccion eliminada correctamente";
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult ModificarTransaccion(int idtransaccion, float cantidad, string tipoTransaccion, string concepto)
+        {
+            this.repo.ModificarTransaccion(idtransaccion, cantidad, tipoTransaccion, concepto);
+            TempData["MENSAJE"] = "Transaccion Modificada correctamente";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult OrdenarIngresoAsc()
+        {
+            int IdUsuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).ToString());
+
+            List<Transacciones> transacciones = this.repo.GetTransaccionesAsc(IdUsuario, "Ingresos");
+
+            return View(transacciones);
+
         }
     }
 }

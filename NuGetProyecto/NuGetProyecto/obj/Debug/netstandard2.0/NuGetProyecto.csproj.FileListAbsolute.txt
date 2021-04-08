@@ -1,0 +1,9 @@
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\bin\Debug\netstandard2.0\NuGetProyecto.deps.json
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\bin\Debug\netstandard2.0\NuGetProyecto.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\bin\Debug\netstandard2.0\NuGetProyecto.pdb
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.csprojAssemblyReference.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.AssemblyInfoInputs.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.AssemblyInfo.cs
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.csproj.CoreCompileInputs.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\NuGetProyecto\NuGetProyecto\obj\Debug\netstandard2.0\NuGetProyecto.pdb

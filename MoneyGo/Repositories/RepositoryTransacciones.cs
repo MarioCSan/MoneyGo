@@ -1,4 +1,6 @@
-﻿using MoneyGo.Data;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MoneyGo.Data;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
 using System;
@@ -10,6 +12,30 @@ namespace MoneyGo.Repositories
 {
     public class RepositoryTransacciones
     {
+
+        #region procedures
+        // ALTER VIEW PAGINARTRANSACCIONES
+        //  AS
+        //     SELECT ROW_NUMBER() OVER(ORDER BY IDTRANSACCION)
+        //     AS POSICION
+        //     , Transacciones.* FROM TRANSACCIONES
+        // GO
+
+        //    ALTER PROCEDURE[dbo].[PAGINACIONTRANSACCIONES]
+        //    (@POSICION INT, @IDUSUARIO int, @REGISTROS INT OUT)
+        //    AS
+        //       SELECT @REGISTROS = COUNT(IdTransaccion) FROM PAGINARTRANSACCIONES where IdUsuario = @IDUSUARIO
+
+        //SELECT POSICION, IdTransaccion, IdUsuario, cantidad, FechaTransaccion, TipoTransaccion, Concepto FROM PAGINARTRANSACCIONES
+
+        //WHERE POSICION >= @POSICION AND
+
+        //POSICION<(@POSICION + 2)
+
+        //GO
+
+
+        #endregion
         TransaccionesContext context;
         MailService MailService;
 
@@ -24,6 +50,13 @@ namespace MoneyGo.Repositories
         public Usuario getDataUsuario(int id)
         {
             return this.context.Usuarios.Where(z => z.IdUsuario == id).FirstOrDefault();
+        }
+
+        public void UpdateImagen(int idusuario, String imagen)
+        {
+            Usuario user = this.getDataUsuario(idusuario);
+            user.ImagenUsuario = imagen;
+            this.context.SaveChanges();
         }
 
         #endregion
@@ -42,12 +75,14 @@ namespace MoneyGo.Repositories
             return consulta.ToList();
         }
 
+
+
         public Transacciones BuscarTransacciones(int IdTransaccion)
         {
-            return this.context.Transacciones.Where(z=> z.IdTransaccion == IdTransaccion).FirstOrDefault();
+            return this.context.Transacciones.Where(z => z.IdTransaccion == IdTransaccion).FirstOrDefault();
         }
 
-        public void NuevaTransaccion(int IdUsuario, float Cantidad, String Tipo, String Concepto, DateTime Fecha)
+        public void NuevaTransaccion(int IdUsuario, Double Cantidad, String Tipo, String Concepto, DateTime Fecha)
         {
             var consulta = from datos in this.context.Transacciones
                            select datos.IdTransaccion;
@@ -67,6 +102,16 @@ namespace MoneyGo.Repositories
 
         }
 
+        public void ModificarTransaccion(int idtransaccion, Double cantidad, String tipo, String concepto)
+        {
+            Transacciones transaccion = this.BuscarTransacciones(idtransaccion);
+            transaccion.Cantidad = cantidad;
+            transaccion.TipoTransaccion = tipo;
+            transaccion.Concepto = concepto;
+           
+            this.context.SaveChanges();
+        }
+
         public void EliminarTransaccion(int idtransaccion)
         {
             //RGPD.¿Se que almacenar los datos X tiempo?¿Necesario campo extra a nulo o booleano para que no se muestre?
@@ -75,11 +120,91 @@ namespace MoneyGo.Repositories
             this.context.SaveChanges();
         }
 
+        public List<Transacciones> GetTransaccionesPaginacion(int posicion, int idusuario, ref int numerotransacciones)
+        {
+            String sql = "PAGINACIONTRANSACCIONES @POSICION, @IDUSUARIO, @REGISTROS OUT";
+            SqlParameter pamposicion = new SqlParameter("@POSICION", posicion);
+            SqlParameter pamusuario = new SqlParameter("@IDUSUARIO", idusuario);
+            SqlParameter pamregistros = new SqlParameter("@REGISTROS", -1);
+            pamregistros.Direction = System.Data.ParameterDirection.Output;
+
+            List<Transacciones> transacciones = this.context.Transacciones.FromSqlRaw(sql, pamposicion, pamusuario, pamregistros).ToList();
+            numerotransacciones = Convert.ToInt32(pamregistros.Value);
+            return transacciones;
+        }
+
+
+        public List<Transacciones> GetTransaccionesAsc(int idusuario, string tipoTransaccion)
+        {
+            var consulta = (from datos in this.context.Transacciones
+                           where datos.IdUsuario == idusuario && datos.TipoTransaccion == "Ingreso"
+                           select datos).OrderBy(x=>x.Cantidad);
+
+            if (consulta.Count() == 0)
+            {
+                return null;
+            }
+            return consulta.ToList();
+        }
+
+        public List<Transacciones> GetTransaccionesDesc(int idusuario, string tipoTransaccion)
+        {
+            var consulta = (from datos in this.context.Transacciones
+                            where datos.IdUsuario == idusuario && datos.TipoTransaccion == "Ingreso"
+                            select datos).OrderByDescending(x => x.Cantidad);
+
+            if (consulta.Count() == 0)
+            {
+                return null;
+            }
+            return consulta.ToList();
+        }
+
 
         #endregion
 
         #region usuariosLogin
+        public bool BuscarEmail(String email)
+        {
+            bool emailValido = false;
+            var consulta = from datos in this.context.Usuarios
+                           where datos.Email == email
+                           select datos;
 
+            if (consulta != null)
+            {
+                emailValido = true;
+            }
+            return emailValido;
+        }
+
+        public Usuario GetUsuarioEmail(String email)
+        {
+            bool emailValido = BuscarEmail(email);
+
+            if (emailValido)
+            {
+                return this.context.Usuarios.SingleOrDefault(x => x.Email == email);
+
+            } else
+            {
+                return null;
+            }
+        }
+
+        public bool BuscarEmailRecuperacion(String email)
+        {
+            bool emailValido = false;
+            var consulta = from datos in this.context.Usuarios
+                           where datos.Email == email
+                           select datos;
+
+            if (consulta != null)
+            {
+                emailValido = true;
+            }
+            return emailValido;
+        }
         //Storedprocedure para el alta de usuario??
         public void InsertarUsuario(String nombreUsuario, String password, String Nombre, String email)
         {
@@ -104,6 +229,19 @@ namespace MoneyGo.Repositories
             this.MailService.SendEmailRegistro(email, Nombre);
 
         }
+
+        public void CambiarPassword(Usuario usuario, string password)
+        {
+            Usuario user = usuario;
+
+            String salt = CypherService.GetSalt();
+            user.Salt = salt;
+            user.Password = CypherService.CifrarContenido(password, salt);
+
+            this.context.SaveChanges();
+
+        }
+
         public Usuario ValidarUsuario(String email, String password)
         {
             Usuario user = this.context.Usuarios.Where(z => z.Email == email).FirstOrDefault();
@@ -129,6 +267,22 @@ namespace MoneyGo.Repositories
                 }
             }
         }
+
+        public String GetEmail(int idusuario)
+        {
+            Usuario user = this.context.Usuarios.Where(z => z.IdUsuario == idusuario).FirstOrDefault();
+
+            string email = user.Email;
+            return email;
+        }
         #endregion
+
+        public string GenerarToken()
+        {
+            Random rnd = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            
+            return new string(Enumerable.Repeat(chars, 16).Select(s => s[rnd.Next(s.Length)]).ToArray());
+        }
     }
 }

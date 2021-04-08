@@ -15,6 +15,7 @@ namespace MoneyGo.Data
         }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Transacciones> Transacciones { get; set; }
+        public DbSet<VistaPaginacion> VistaPaginacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

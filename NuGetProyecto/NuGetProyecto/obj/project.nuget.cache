@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "JEJH5UUH2kn3e9K4T7oy9SsSmUzH5SqaiitI06+ydOybohxZ+UmUTaRtsratWC2ugB7T6FhxHKQGIPKejB02cg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\NuGetProyecto\\NuGetProyecto\\NuGetProyecto.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mario\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
