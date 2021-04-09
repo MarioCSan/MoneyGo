@@ -81,7 +81,10 @@ namespace MoneyGoAPI
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

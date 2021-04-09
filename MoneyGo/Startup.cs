@@ -15,21 +15,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MoneyGo.Models;
 using Microsoft.AspNetCore.Identity;
+using MoneyGo.Services;
 
 namespace MoneyGo
 {
     public class Startup
     {
-        IConfiguration configuration;
+        IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            this.Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            String urlapi = this.Configuration["urlapi"];
+
+            services.AddTransient(x => new ServiceTransacciones(urlapi));
+            services.AddTransient(x => new ServiceUsuario(urlapi));
+
             services.AddAuthentication(
                 options =>
                 {
@@ -53,9 +59,6 @@ namespace MoneyGo
             //services.AddSingleton<UploadService>();
             services.AddSingleton<PathProvider>();
 
-
-
-            services.AddTransient<RepositoryTransacciones>();
             services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));
 
             services.AddControllersWithViews(option => option.EnableEndpointRouting = false);

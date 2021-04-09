@@ -21,10 +21,10 @@ namespace MoneyGoAPI.Controllers
         RepositoryTransacciones repo;
         HelperToken helperToken;
 
-        public AuthController(RepositoryTransacciones repo, HelperToken helper)
+        public AuthController(RepositoryTransacciones repo, HelperToken helpertoken)
         {
             this.repo = repo;
-            this.helperToken = helper;
+            this.helperToken = helpertoken;
         }
 
         [HttpPost]

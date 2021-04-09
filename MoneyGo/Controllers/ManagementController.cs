@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Filters;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
-using MoneyGo.Repositories;
+using MoneyGo.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -15,22 +16,19 @@ namespace MoneyGo.Controllers
 {
     public class ManagementController : Controller
     {
-        RepositoryTransacciones repo;
-        PathProvider PathProvider;
+        ServiceUsuario service;
 
-        public ManagementController(RepositoryTransacciones repo, PathProvider PathProvider)
+        public ManagementController(ServiceUsuario service)
         {
-            this.repo = repo;
-            this.PathProvider = PathProvider;
+            this.service = service;
         }
 
         [AuthorizeUsuarios]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             int id = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            Usuario user = this.repo.getDataUsuario(id);
-
+         
             if (TempData["MSG"] != null)
             {
                 ViewData["MSG"] = TempData["MSG"];
@@ -41,12 +39,9 @@ namespace MoneyGo.Controllers
                 ViewData["ERR"] = TempData["ERR"];
             }
 
-            return View(user);
+            return View(await this.service.GetDataUsuario());
 
         }
-
-
-        [HttpPost]
 
         public IActionResult ChangePassword(String oldpassword, String newpassword, String passwordconfirm)
         {

@@ -65,3 +65,4 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Debu
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Debug\netcoreapp3.1\MoneyGoAPI.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Debug\netcoreapp3.1\MoneyGoAPI.pdb
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Debug\netcoreapp3.1\MoneyGoAPI.genruntimeconfig.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Debug\netcoreapp3.1\MoneyGoAPI.csprojAssemblyReference.cache
