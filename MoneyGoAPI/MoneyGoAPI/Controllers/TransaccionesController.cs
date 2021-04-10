@@ -66,7 +66,7 @@ namespace MoneyGoAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("[action]")]
+        [Route("[action]/{idtransaccion}")]
         [Authorize]
         public ActionResult<Transacciones> Eliminar(int idtransaccion)
         {

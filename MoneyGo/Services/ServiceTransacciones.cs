@@ -108,5 +108,11 @@ namespace MoneyGo.Services
 
         }
 
+        public async Task EliminarTransaccion(int idtransaccion)
+        {
+            String request = "/api/Transacciones/Eliminar/"+idtransaccion;
+            await this.CallApi<Transacciones>(request);
+        }
+
     }
 }
