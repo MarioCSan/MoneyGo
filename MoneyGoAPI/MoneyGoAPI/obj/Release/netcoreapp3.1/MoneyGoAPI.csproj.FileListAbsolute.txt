@@ -66,3 +66,7 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Rele
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\MoneyGoAPI.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\MoneyGoAPI.pdb
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\MoneyGoAPI.genruntimeconfig.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\bin\Release\netcoreapp3.1\Azure.Core.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\bin\Release\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\bin\Release\netcoreapp3.1\Azure.Storage.Files.Shares.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll

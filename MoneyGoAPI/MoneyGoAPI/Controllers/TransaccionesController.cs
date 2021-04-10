@@ -32,6 +32,14 @@ namespace MoneyGoAPI.Controllers
             Usuarios usuario = JsonConvert.DeserializeObject<Usuarios>(jsonusuario);
             return this.repo.GetTransacciones(usuario.IdUsuario);
         }
+        [Authorize]
+        [HttpGet]
+        [Route("[action]/{idtransaccion}")]
+        public ActionResult<Transacciones> GetTransaccion(int idtransaccion)
+        {
+            Transacciones trnsc = this.repo.BuscarTransacciones(idtransaccion);
+            return trnsc;
+        }
 
         [HttpPost]
         [Route("[action]")]
@@ -40,16 +48,15 @@ namespace MoneyGoAPI.Controllers
         {
             List<Claim> claims = HttpContext.User.Claims.ToList();
             String jsonusuario = claims.SingleOrDefault(x => x.Type == "UserData").Value;
-           
-            Usuarios usuario = JsonConvert.DeserializeObject<Usuarios>(jsonusuario);
 
+            Usuarios usuario = JsonConvert.DeserializeObject<Usuarios>(jsonusuario);
             DateTime date = DateTime.UtcNow;
             this.repo.NuevaTransaccion(usuario.IdUsuario, cantidad, tipoTransaccion, Concepto, date);
             return RedirectToAction("GetTransaccionesUsuario");
         }
 
         [HttpPut]
-        [Route("[action]/{id}")]
+        [Route("[action]/{idtransaccion}")]
         [Authorize]
         public ActionResult<Transacciones> Modificar(int idtransaccion, float cantidad, String tipoTransaccion, String Concepto)
         {

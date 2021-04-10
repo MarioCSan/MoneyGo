@@ -5,7 +5,11 @@ C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Rele
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\MoneyGoAPI.deps.json
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\MoneyGoAPI.runtimeconfig.json
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\MoneyGoAPI.pdb
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Core.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Storage.Common.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Storage.Files.Shares.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGoAPI\MoneyGoAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll

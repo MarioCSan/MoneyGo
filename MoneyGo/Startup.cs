@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using MoneyGo.Data;
 using MoneyGo.Helpers;
-using MoneyGo.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,9 +51,9 @@ namespace MoneyGo
                 OptionsBuilderConfigurationExtensions.IdleTimeout = TimeSpan.FromMinutes(10);
             });
 
-            String database = configuration.GetConnectionString("database");
+            String database = Configuration.GetConnectionString("database");
 
-            services.AddSingleton<IConfiguration>(this.configuration);
+            services.AddSingleton<IConfiguration>(this.Configuration);
             services.AddSingleton<MailService>();
             //services.AddSingleton<UploadService>();
             services.AddSingleton<PathProvider>();

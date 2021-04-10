@@ -58,7 +58,7 @@ namespace MoneyGo.Services
             using (HttpClient client = new HttpClient())
             {
                 String request = "/api/Transacciones/NuevaTransaccion";
-               client.BaseAddress = this.UriApi;
+                client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
                 Transacciones trnsc = new Transacciones();
@@ -67,12 +67,45 @@ namespace MoneyGo.Services
                 trnsc.TipoTransaccion = tipoTransaccion;
                 trnsc.Concepto = concepto;
 
-                 String json = JsonConvert.SerializeObject(trnsc);
+                String json = JsonConvert.SerializeObject(trnsc);
                 StringContent content =
                     new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PutAsync(request, content);
             }
-          
+
+        }
+
+        public async Task<Transacciones> GetDataModificar(int idtransaccion)
+        {
+            String request = "/api​/Transacciones/GetTransaccion/" + idtransaccion;
+            Transacciones transacciones =
+                await this.CallApi<Transacciones>(request);
+            return transacciones;
+
+        }
+
+        public async Task ModificarTransaccion(int idtransaccion, float cantidad, String tipoTransaccion, String concepto)
+        {
+
+            using (HttpClient client = new HttpClient())
+            {
+                String request = "/api/Transacciones/Modificar/" + idtransaccion;
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                Transacciones trnsc = await GetDataModificar(idtransaccion);
+
+
+                trnsc.Cantidad = cantidad;
+                trnsc.TipoTransaccion = tipoTransaccion;
+                trnsc.Concepto = concepto;
+
+                String json = JsonConvert.SerializeObject(trnsc);
+                StringContent content =
+                    new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PutAsync(request, content);
+            }
+
         }
 
     }
