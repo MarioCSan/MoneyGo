@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {}
+    "C:\\Users\\AlumnoMCSD\\Documents\\0-master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {
+    "C:\\Users\\AlumnoMCSD\\Documents\\0-master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
+        "projectUniqueName": "C:\\Users\\AlumnoMCSD\\Documents\\0-master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
         "projectName": "MoneyGoAPI",
-        "projectPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
-        "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mario\\Documents\\0-Master\\MoneyGo\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\obj\\",
+        "projectPath": "C:\\Users\\AlumnoMCSD\\Documents\\0-master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\MoneyGoAPI.csproj",
+        "packagesPath": "C:\\Users\\AlumnoMCSD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AlumnoMCSD\\Documents\\0-master\\MoneyGo\\MoneyGoAPI\\MoneyGoAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AlumnoMCSD\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -99,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -68,11 +68,11 @@ namespace MoneyGo.Controllers
         }
 
         [HttpPost]
-        public IActionResult RecuperarPassword(String email)
+        public async Task<IActionResult> RecuperarPassword(String email)
         {
             
-            Usuario usuario = this.service.GetUsuarioEmail(email);
-            if (usuario != null)
+            bool valido = await this.service.BuscarEmail(email);
+            if (valido)
             {
                 // Token => cadena aleatorea de 16 caracteres numerocos??
 
@@ -90,35 +90,35 @@ namespace MoneyGo.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public IActionResult ResetPassword(string token, string email)
-        {
-            Usuario usuario = this.repo.GetUsuarioEmail(email);
-            ViewData["token"] = token;
-            return View(usuario);
+        //[AllowAnonymous]
+        //public IActionResult ResetPassword(string token, string email)
+        //{
+        //    Usuario usuario = this.repo.GetUsuarioEmail(email);
+        //    ViewData["token"] = token;
+        //    return View(usuario);
 
-        }
+        //}
 
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult ResetPassword(String email, String password, String passwordConfirm)
-        {
-            if (password.Equals(passwordConfirm))
-            {
-                Usuario usuario = this.repo.GetUsuarioEmail(email);
-                this.repo.CambiarPassword(usuario, password);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public IActionResult ResetPassword(String email, String password, String passwordConfirm)
+        //{
+        //    if (password.Equals(passwordConfirm))
+        //    {
+        //        Usuario usuario = this.repo.GetUsuarioEmail(email);
+        //        this.service.CambiarPassword(usuario, password);
 
-                return RedirectToAction("Index", "Landing");
+        //        return RedirectToAction("Index", "Landing");
 
-            }
-            else
-            {
-                ViewData["ERROR"] = "Las contraseñas no son iguales";
-                return View();
-            }
+        //    }
+        //    else
+        //    {
+        //        ViewData["ERROR"] = "Las contraseñas no son iguales";
+        //        return View();
+        //    }
 
 
-        }
+        //}
 
         public IActionResult PoliticaCookies()
         {

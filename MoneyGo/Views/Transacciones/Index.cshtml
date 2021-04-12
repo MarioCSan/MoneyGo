@@ -3,10 +3,6 @@
 
 }
 
-@{
-    int numeropagina = 1;
-    int registros = (int)ViewData["NUMEROREGISTROS"];
-}
 
 
 
@@ -31,26 +27,6 @@
 
 
 <div class="jumbotron ">
-
-
-    <ul class="list-group list-group-horizontal float-left">
-        @for (int i = 1; i <= registros; i += 4)
-        {
-
-            <li class="list-group-item">
-                <a asp-controller="Transacciones"
-                   asp-action="Index"
-                   asp-route-posicion="@i">
-                    @numeropagina
-                </a>
-            </li>
-
-            numeropagina += 1;
-        }
-    </ul>
-
-
-
     <div class="mb-2">
         <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalNueva">
             Nueva transaccion

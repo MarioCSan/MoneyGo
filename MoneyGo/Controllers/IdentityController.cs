@@ -22,7 +22,7 @@ namespace MoneyGo.Controllers
         ServiceUsuario ApiService;
         MailService MailService;
 
-        public IdentityController(ServiceUsuario service,MailService MailService)
+        public IdentityController(ServiceUsuario service, MailService MailService)
         {
             this.ApiService = service;
 
@@ -38,7 +38,8 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> Login(String email, String password)
         {
             String token = await this.ApiService.GetToken(email, password);
-
+            HttpContext.Session.SetString("token", token);
+           String test = HttpContext.Session.GetString("token");
             if (token == null)
             {
                 ViewData["MENSAJE"] = "usuario o password incorrecto";
@@ -66,7 +67,7 @@ namespace MoneyGo.Controllers
                     user.ImagenUsuario = "UserLogo.svg";
                 }
                 HttpContext.Session.SetString("img", user.ImagenUsuario);
-                return RedirectToAction("Index", "Transacciones");
+                return RedirectToAction("Index", "Transacciones", token);
             }
         }
 
@@ -83,12 +84,12 @@ namespace MoneyGo.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
-        //{
-        //    this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-        //    return RedirectToAction("Index", "Landing");
-        //}
-      
+        [HttpPost]
+        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
+        {
+            await this.ApiService.InsertarUsuario(nombre, nombreUsuario, password, email);
+            return RedirectToAction("Index", "Landing");
+        }
+
     }
 }

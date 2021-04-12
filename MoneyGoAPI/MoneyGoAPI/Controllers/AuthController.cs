@@ -50,7 +50,7 @@ namespace MoneyGoAPI.Controllers
                     issuer: this.helperToken.Issuer,
                     audience: this.helperToken.Audience,
                     claims: claims,
-                    expires: DateTime.UtcNow.AddMinutes(25),
+                    expires: DateTime.UtcNow.AddMinutes(30),
                     notBefore: DateTime.UtcNow,
                     signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(this.helperToken.GetKeyToken(), SecurityAlgorithms.HmacSha256));
 

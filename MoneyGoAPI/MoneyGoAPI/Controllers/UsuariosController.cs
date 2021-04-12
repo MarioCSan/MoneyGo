@@ -45,6 +45,26 @@ namespace MoneyGoAPI.Controllers
             return this.repo.getDataUsuario(usuario.IdUsuario);
         }
 
+        [HttpGet]
+        [Route("[action]/{id}")]
+        [Authorize]
+        public ActionResult<Usuarios> GetDataUsuario(int id)
+        {
+
+            Usuarios usuario = this.repo.getDataUsuario(id);
+            return this.repo.getDataUsuario(usuario.IdUsuario);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult<Usuarios> ValidarUsuario(String email, String password)
+        {
+
+
+            Usuarios usuario = this.repo.ValidarUsuario(email, password);
+            return usuario;
+        }
+
         [HttpPost]
         [Route("[action]")]
         public ActionResult<Usuarios> NuevoUsuario(String nombreUsuario, String password, String Nombre, String email)
