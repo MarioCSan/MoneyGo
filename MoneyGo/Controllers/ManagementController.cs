@@ -17,17 +17,19 @@ namespace MoneyGo.Controllers
     public class ManagementController : Controller
     {
         ServiceUsuario service;
+        PathProvider PathProvider;
 
-        public ManagementController(ServiceUsuario service)
+        public ManagementController(ServiceUsuario service, PathProvider pathProvider)
         {
             this.service = service;
+            this.PathProvider = pathProvider;
         }
 
         [AuthorizeUsuarios]
         public async Task<IActionResult> Index()
         {
-
             int id = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Usuario usuario = await this.service.GetDataUsuario(id);
          
             if (TempData["MSG"] != null)
             {
@@ -39,32 +41,32 @@ namespace MoneyGo.Controllers
                 ViewData["ERR"] = TempData["ERR"];
             }
 
-            return View(await this.service.GetDataUsuario());
+            return View(usuario);
 
         }
 
-        public IActionResult ChangePassword(String oldpassword, String newpassword, String passwordconfirm)
+        public async Task<IActionResult> ChangePassword(String oldpassword, String newpassword, String passwordconfirm)
         {
             String email = HttpContext.User.FindFirstValue(ClaimTypes.Email);
-            Usuario user = this.repo.ValidarUsuario(email, oldpassword);
+            Usuario user = await this.service.ValidarUsuario(email, oldpassword);
 
             if (user != null && newpassword.Equals(passwordconfirm))
             {
                 TempData["MSG"] = "Contraseña cambiada con éxito";
-                this.repo.CambiarPassword(user, newpassword);
+               await this.service.ModificarPassword(newpassword);
+
+            }
+            else if(!newpassword.Equals(passwordconfirm))
+            {
+               
+                TempData["ERR"] = "La contraseñas no coinciden";
 
             }
             else if (user == null)
             {
-                user = this.repo.getDataUsuario(int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)));
+
                 ViewData["ERR"] = "La contraseña antigua no es correcta";
                 return RedirectToAction("Index", "Landing");
-            }
-            else
-            {
-                user = this.repo.getDataUsuario((int)HttpContext.Session.GetInt32("user"));
-                TempData["ERR"] = "La contraseñas no coinciden";
-
             }
 
             return RedirectToAction("Index", "Management", user);
@@ -74,7 +76,7 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> Index(IFormFile imagen)
         {
             int id = int.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            Usuario user = this.repo.getDataUsuario(id);
+            Usuario user = await this.service.GetDataUsuario();
               
             if (imagen != null)
             {
@@ -88,7 +90,7 @@ namespace MoneyGo.Controllers
                     {
                         await imagen.CopyToAsync(Stream);
                     }
-                    this.repo.UpdateImagen(id, filename);
+                    this.service.ModificarImagen(filename);
                 }
                 ViewData["MSG"] = "Imagen cambiada con exito";
 

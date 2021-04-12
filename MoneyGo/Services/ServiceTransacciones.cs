@@ -1,4 +1,5 @@
-﻿using MoneyGo.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MoneyGo.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,26 @@ namespace MoneyGo.Services
 
         private Uri UriApi;
         private MediaTypeWithQualityHeaderValue Header;
-
-
-        public ServiceTransacciones(String url)
+        private IHttpContextAccessor http;
+        
+        public ServiceTransacciones(String url, IHttpContextAccessor http)
         {
             this.UriApi = new Uri(url);
             this.Header = new MediaTypeWithQualityHeaderValue("application/json");
+            this.http = http;
         }
 
+       
         private async Task<T> CallApi<T>(String request)
         {
+            String token = this.http.HttpContext.Session.GetString("token");
             using (HttpClient client = new HttpClient())
             {
+                
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                 HttpResponseMessage response =
                     await client.GetAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -70,7 +76,7 @@ namespace MoneyGo.Services
                 String json = JsonConvert.SerializeObject(trnsc);
                 StringContent content =
                     new StringContent(json, Encoding.UTF8, "application/json");
-                await client.PutAsync(request, content);
+                await client.PostAsync(request, content);
             }
 
         }
@@ -110,7 +116,7 @@ namespace MoneyGo.Services
 
         public async Task EliminarTransaccion(int idtransaccion)
         {
-            String request = "/api/Transacciones/Eliminar/"+idtransaccion;
+            String request = "/api/Transacciones/Eliminar/" + idtransaccion;
             await this.CallApi<Transacciones>(request);
         }
 

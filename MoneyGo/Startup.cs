@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using MoneyGo.Models;
 using Microsoft.AspNetCore.Identity;
 using MoneyGo.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace MoneyGo
 {
@@ -28,12 +31,14 @@ namespace MoneyGo
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IHttpContextAccessor accessor)
         {
             String urlapi = this.Configuration["urlapi"];
 
-            services.AddTransient(x => new ServiceTransacciones(urlapi));
-            services.AddTransient(x => new ServiceUsuario(urlapi));
+            
+            services.AddSingleton(x => new ServiceTransacciones(urlapi, accessor));
+            services.AddSingleton(x => new ServiceUsuario(urlapi));
+            services.AddSingleton<ServiceSession>();
 
             services.AddAuthentication(
                 options =>
@@ -64,7 +69,7 @@ namespace MoneyGo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env )
         {
             if (env.IsDevelopment())
             {
@@ -74,13 +79,14 @@ namespace MoneyGo
 
             app.UseStaticFiles();
 
-            //Session
-            app.UseSession();
+            
 
             app.UseRouting();
 
             app.UseStaticFiles();
             app.UseAuthentication();
+            //Session
+            app.UseSession();
             app.UseMvc(configureRoutes =>
             {
                 configureRoutes.MapRoute(name: "default", template: "{controller=Landing}/{action=Index}/{id?}");

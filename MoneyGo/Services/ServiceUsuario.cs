@@ -1,4 +1,5 @@
-﻿using MoneyGo.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MoneyGo.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,7 +17,7 @@ namespace MoneyGo.Services
 
         private Uri UriApi;
         private MediaTypeWithQualityHeaderValue Header;
-
+        private String authToken;
 
         public ServiceUsuario(String url)
         {
@@ -38,7 +39,7 @@ namespace MoneyGo.Services
                 };
                 String json = JsonConvert.SerializeObject(login);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                String request = "auth/login";
+                String request = this.UriApi + "/api/auth/login";
                 HttpResponseMessage response = await client.PostAsync(request, content);
 
                 if (response.IsSuccessStatusCode)
@@ -47,6 +48,7 @@ namespace MoneyGo.Services
                     JObject jobject = JObject.Parse(data);
 
                     String token = jobject.GetValue("response").ToString();
+                    
                     return token;
                 }
                 else
@@ -98,19 +100,29 @@ namespace MoneyGo.Services
             }
         }
 
+
         public async Task<Usuario> GetDataUsuario(String token)
         {
-            String request = "/api/Usuarios/GetDataUsuario";
+            String request = "/api/Usuarios/GetDataUsuario/";
             Usuario data = await this.CallApi<Usuario>(request, token);
+            return data;
+        }
+
+        public async Task<Usuario> GetDataUsuario(int idusuario)
+        {
+            String request = "/api/Usuarios/GetDataUsuario/"+idusuario;
+            Usuario data = await this.CallApi<Usuario>(request);
             return data;
         }
 
         public async Task<Usuario> GetDataUsuario()
         {
+            
             String request = "/api/Usuarios/GetDataUsuario";
             Usuario data = await this.CallApi<Usuario>(request);
             return data;
         }
+
 
         public async Task InsertarUsuario(String Nombre, String nombreUsuario, String password, String email)
         {
@@ -134,9 +146,9 @@ namespace MoneyGo.Services
             }
         }
 
-        public async Task ModificarPassword(String password, String token)
+        public async Task ModificarPassword(String password)
         {
-
+            
             using (HttpClient client = new HttpClient())
             {
                 String request = "/api/Usuarios/ModificarPassword";
@@ -159,7 +171,7 @@ namespace MoneyGo.Services
             return valido;
         }
 
-        public async Task ModificarImagen(String imagen, String token)
+        public async Task ModificarImagen(String imagen)
         {
 
             using (HttpClient client = new HttpClient())
@@ -183,6 +195,13 @@ namespace MoneyGo.Services
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             return new string(Enumerable.Repeat(chars, 16).Select(s => s[rnd.Next(s.Length)]).ToArray());
+        }
+
+        public async Task<Usuario> ValidarUsuario(String email, string password)
+        {
+            String request = "/api/Usuarios/GetDataUsuario";
+            Usuario data = await this.CallApi<Usuario>(request);
+            return data;
         }
     }
 }
