@@ -37,6 +37,7 @@ namespace MoneyGo
 
             
             services.AddSingleton(x => new ServiceTransacciones(urlapi, accessor));
+            services.AddHttpContextAccessor();
             services.AddSingleton(x => new ServiceUsuario(urlapi));
             services.AddSingleton<ServiceSession>();
 
