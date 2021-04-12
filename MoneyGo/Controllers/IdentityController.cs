@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Helpers;
 using MoneyGo.Models;
-using MoneyGo.Repositories;
+using MoneyGo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +19,12 @@ namespace MoneyGo.Controllers
     public class IdentityController : Controller
     {
 
-        RepositoryTransacciones repo;
+        ServiceUsuario ApiService;
         MailService MailService;
 
-        public IdentityController(RepositoryTransacciones repo, MailService MailService)
+        public IdentityController(ServiceUsuario service,MailService MailService)
         {
-            this.repo = repo;
+            this.ApiService = service;
 
             this.MailService = MailService;
         }
@@ -37,26 +37,23 @@ namespace MoneyGo.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(String email, String password)
         {
-            Usuario usr = this.repo.ValidarUsuario(email, password);
-           
-            if (usr == null)
+            String token = await this.ApiService.GetToken(email, password);
+
+            if (token == null)
             {
                 ViewData["MENSAJE"] = "usuario o password incorrecto";
                 return View();
             }
             else
             {
-                if (usr.ImagenUsuario == null)
-                {
-                    usr.ImagenUsuario = "UserLogo.svg";
-                }
+                Usuario user = await this.ApiService.GetDataUsuario(token);
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
                     ClaimTypes.Name, ClaimTypes.Role);
-                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usr.IdUsuario.ToString()));
-                identity.AddClaim(new Claim(ClaimTypes.Name, usr.NombreUsuario));
-                identity.AddClaim(new Claim(ClaimTypes.Email, usr.Email));
-                identity.AddClaim(new Claim(ClaimTypes.UserData, usr.ImagenUsuario));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.IdUsuario.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.NombreUsuario));
+                identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+                identity.AddClaim(new Claim(ClaimTypes.UserData, user.ImagenUsuario));
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties
                 {
@@ -64,7 +61,11 @@ namespace MoneyGo.Controllers
                     ExpiresUtc = DateTime.Now.AddMinutes(5)
                 });
 
-                HttpContext.Session.SetString("img", usr.ImagenUsuario);
+                if (user.ImagenUsuario == null)
+                {
+                    user.ImagenUsuario = "UserLogo.svg";
+                }
+                HttpContext.Session.SetString("img", user.ImagenUsuario);
                 return RedirectToAction("Index", "Transacciones");
             }
         }
@@ -82,12 +83,12 @@ namespace MoneyGo.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
-        {
-            this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
-            return RedirectToAction("Index", "Landing");
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String email)
+        //{
+        //    this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
+        //    return RedirectToAction("Index", "Landing");
+        //}
       
     }
 }

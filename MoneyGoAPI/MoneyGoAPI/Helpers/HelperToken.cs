@@ -13,51 +13,60 @@ namespace MoneyGoAPI.Helpers
     public class HelperToken
     {
         public String Issuer { get; set; }
-        public String Audience{ get; set; }
+        public String Audience { get; set; }
         public String SecretKey { get; set; }
 
-        public HelperToken(IConfiguration configuration) {
+        public HelperToken(IConfiguration configuration)
+        {
             this.Issuer = configuration["ApiOAuth:Issuer"];
             this.Audience = configuration["ApiOAuth:Audience"];
             this.SecretKey = configuration["ApiOAuth:SecretKey"];
         }
 
+        //NECESITAMOS UN METODO PARA GENERAR UNA CLAVE
+        //TOKEN A PARTIR DE NUESTRO SECRETKEY
         public SymmetricSecurityKey GetKeyToken()
         {
-            byte[] data = Encoding.UTF8.GetBytes(this.SecretKey);
+            byte[] data =
+                Encoding.UTF8.GetBytes(this.SecretKey);
             return new SymmetricSecurityKey(data);
         }
 
-        //MEtodo para la configuracion del token de seguridad que se generara
-        //Los metodos de configuracion son options
+        //METODO PARA LA CONFIGURACION DEL TOKEN DE SEGURIDAD
+        //QUE SE GENERARA
+        //LOS METODOS DE CONFIGURACION SON Action
         public Action<JwtBearerOptions> GetJwtBearerOptions()
         {
-            Action<JwtBearerOptions> jwtoptions = new Action<JwtBearerOptions>(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters()
+            Action<JwtBearerOptions> jwtoptions =
+                new Action<JwtBearerOptions>(options =>
                 {
-                    ValidateActor = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = this.Issuer,
-                    ValidAudience = this.Audience,
-                    IssuerSigningKey = this.GetKeyToken()
-                };
-            });
+                    options.TokenValidationParameters =
+                    new TokenValidationParameters()
+                    {
+                        ValidateActor = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = this.Issuer,
+                        ValidAudience = this.Audience,
+                        IssuerSigningKey = this.GetKeyToken()
+                    };
+                });
             return jwtoptions;
         }
 
-        //Metodo Actiion para las opciones de autenticacion
+        //METODO Action PARA LAS OPCIONES DE AUTHENTICATION
         public Action<AuthenticationOptions> GetAuthOptions()
         {
             Action<AuthenticationOptions> authoptions =
                 new Action<AuthenticationOptions>(options =>
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultAuthenticateScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
                 });
             return authoptions;
         }

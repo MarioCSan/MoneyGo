@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MoneyGo.Models;
-using MoneyGo.Repositories;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,17 +11,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using MoneyGo.Helpers;
 using System.Security.Claims;
+using MoneyGo.Services;
 
 namespace MoneyGo.Controllers
 {
     public class LandingController : Controller
     {
-       
-        RepositoryTransacciones repo;
+
+        ServiceUsuario service;
         MailService mailService;
-        public LandingController(RepositoryTransacciones repo, MailService mailService)
+        public LandingController(ServiceUsuario service, MailService mailService)
         {
-            this.repo = repo;
+            this.service = service;
             this.mailService = mailService;
         }
 
@@ -35,15 +35,16 @@ namespace MoneyGo.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Register(String nombre, String nombreUsuario, String password, String RepetirPassword, String email)
+        public async Task<IActionResult> Register(String nombre, String nombreUsuario, String password, String RepetirPassword, String email)
         {
             if(password == RepetirPassword) {
-                bool valido = this.repo.BuscarEmail(email);
+                bool valido = await this.service.BuscarEmail(email);
 
                 if (valido)
                 {
-                    this.repo.InsertarUsuario(nombreUsuario, password, nombre, email);
+                    await this.service.InsertarUsuario(nombre, nombreUsuario, password, email);
                     return RedirectToAction("Index", "Transacciones");
                 }
                 else
@@ -70,12 +71,12 @@ namespace MoneyGo.Controllers
         public IActionResult RecuperarPassword(String email)
         {
             
-            Usuario usuario = this.repo.GetUsuarioEmail(email);
+            Usuario usuario = this.service.GetUsuarioEmail(email);
             if (usuario != null)
             {
                 // Token => cadena aleatorea de 16 caracteres numerocos??
 
-                var token = this.repo.GenerarToken(); // await Usuario.GeneratePasswordResetTokenAsync(usuario);
+                var token = this.service.GenerarTokenEmail(); // await Usuario.GeneratePasswordResetTokenAsync(usuario);
                 var link = Url.Action("ResetPassword", "Landing", new { token, email = email }, Request.Scheme);
                 this.mailService.SendEmailRecuperacion(email, link); 
                 ViewData["MSG"] = "Se ha enviado un email de recuperación. Revise su correo.";

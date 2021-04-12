@@ -4,6 +4,7 @@ using MoneyGoAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MoneyGoAPI.Repositories
@@ -182,7 +183,7 @@ namespace MoneyGoAPI.Repositories
                            select datos.IdUsuario;
 
             int maxId = consulta.Max() + 1;
-
+           
             Usuarios user = new Usuarios();
             user.IdUsuario = maxId;
             user.Nombre = Nombre;
