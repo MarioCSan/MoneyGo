@@ -31,16 +31,28 @@ namespace MoneyGo
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IHttpContextAccessor accessor)
+        public void ConfigureServices(IServiceCollection services)
         {
             String urlapi = this.Configuration["urlapi"];
 
-            
-            services.AddSingleton(x => new ServiceTransacciones(urlapi, accessor));
+            #region services
             services.AddHttpContextAccessor();
-            services.AddSingleton(x => new ServiceUsuario(urlapi));
+            services.AddTransient<ServiceTransacciones>(st =>
+            {
+                var context = st.GetService<IHttpContextAccessor>();
+                return new ServiceTransacciones(urlapi, context);
+            });
+
+            services.AddTransient<ServiceUsuario>(st =>
+            {
+                var context = st.GetService<IHttpContextAccessor>();
+                return new ServiceUsuario(urlapi, context);
+            });
             services.AddSingleton<ServiceSession>();
 
+            #endregion
+
+            #region autenticacion
             services.AddAuthentication(
                 options =>
                 {
@@ -52,24 +64,23 @@ namespace MoneyGo
                     CookieAuthenticationDefaults.AuthenticationScheme;
                 }).AddCookie();
 
-            services.AddSession(OptionsBuilderConfigurationExtensions =>
-            {
-                OptionsBuilderConfigurationExtensions.IdleTimeout = TimeSpan.FromMinutes(10);
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
-
-            String database = Configuration.GetConnectionString("database");
+            #endregion
 
             services.AddSingleton<IConfiguration>(this.Configuration);
             services.AddSingleton<MailService>();
-            //services.AddSingleton<UploadService>();
+            services.AddSingleton<UploadService>();
             services.AddSingleton<PathProvider>();
-
-            services.AddDbContext<TransaccionesContext>(options => options.UseSqlServer(database));
 
             services.AddControllersWithViews(option => option.EnableEndpointRouting = false);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env )
         {
             if (env.IsDevelopment())
@@ -77,17 +88,14 @@ namespace MoneyGo
                 app.UseDeveloperExceptionPage();
             }
 
-
-            app.UseStaticFiles();
-
-            
-
             app.UseRouting();
-
             app.UseStaticFiles();
+
+            app.UseAuthorization();
             app.UseAuthentication();
-            //Session
+            app.UseResponseCaching();
             app.UseSession();
+
             app.UseMvc(configureRoutes =>
             {
                 configureRoutes.MapRoute(name: "default", template: "{controller=Landing}/{action=Index}/{id?}");

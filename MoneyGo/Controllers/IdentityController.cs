@@ -38,8 +38,6 @@ namespace MoneyGo.Controllers
         public async Task<IActionResult> Login(String email, String password)
         {
             String token = await this.ApiService.GetToken(email, password);
-            HttpContext.Session.SetString("token", token);
-           String test = HttpContext.Session.GetString("token");
             if (token == null)
             {
                 ViewData["MENSAJE"] = "usuario o password incorrecto";
@@ -47,7 +45,8 @@ namespace MoneyGo.Controllers
             }
             else
             {
-                Usuario user = await this.ApiService.GetDataUsuario(token);
+                HttpContext.Session.SetString("token", token);
+                Usuario user = await this.ApiService.GetDataUsuario();
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
                     ClaimTypes.Name, ClaimTypes.Role);

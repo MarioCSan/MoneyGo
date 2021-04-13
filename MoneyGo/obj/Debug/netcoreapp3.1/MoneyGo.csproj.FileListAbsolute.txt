@@ -316,3 +316,5 @@ C:\Users\AlumnoMCSD\Documents\0-master\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\M
 C:\Users\AlumnoMCSD\Documents\0-master\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.csproj.CopyComplete
 C:\Users\AlumnoMCSD\Documents\0-master\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.genruntimeconfig.cache
 C:\Users\AlumnoMCSD\Documents\0-master\MoneyGo\MoneyGo\obj\Debug\netcoreapp3.1\MoneyGo.csprojAssemblyReference.cache
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\mario\Documents\0-Master\MoneyGo\MoneyGo\MoneyGo\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

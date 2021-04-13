@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,14 +18,16 @@ namespace MoneyGo.Services
 
         private Uri UriApi;
         private MediaTypeWithQualityHeaderValue Header;
-        private String authToken;
+        private IHttpContextAccessor http;
 
-        public ServiceUsuario(String url)
+        public ServiceUsuario(String url, IHttpContextAccessor http)
         {
             this.UriApi = new Uri(url);
             this.Header = new MediaTypeWithQualityHeaderValue("application/json");
+            this.http = http;
         }
 
+        #region llamadas api
         public async Task<String> GetToken(String useremail, String password)
         {
             using (HttpClient client = new HttpClient())
@@ -60,27 +63,7 @@ namespace MoneyGo.Services
 
         private async Task<T> CallApi<T>(String request)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = this.UriApi;
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(this.Header);
-                HttpResponseMessage response =
-                    await client.GetAsync(request);
-                if (response.IsSuccessStatusCode)
-                {
-                    T data = await response.Content.ReadAsAsync<T>();
-                    return data;
-                }
-                else
-                {
-                    return default(T);
-                }
-            }
-        }
-
-        private async Task<T> CallApi<T>(String request, String token)
-        {
+            String token = this.http.HttpContext.Session.GetString("token");
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = this.UriApi;
@@ -100,13 +83,7 @@ namespace MoneyGo.Services
             }
         }
 
-
-        public async Task<Usuario> GetDataUsuario(String token)
-        {
-            String request = "/api/Usuarios/GetDataUsuario/";
-            Usuario data = await this.CallApi<Usuario>(request, token);
-            return data;
-        }
+        #endregion
 
         public async Task<Usuario> GetDataUsuario(int idusuario)
         {
@@ -128,12 +105,13 @@ namespace MoneyGo.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                String request = "/api/Usuarios/NuevoUsuario";
+                String request = "api/Usuarios/NuevoUsuario";
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
                 byte[] pass = Encoding.ASCII.GetBytes(password);
                 Usuario user = new Usuario();
+                user.IdUsuario = 0;
                 user.Nombre = Nombre;
                 user.NombreUsuario = nombreUsuario;
                 user.Password = pass;
@@ -141,7 +119,7 @@ namespace MoneyGo.Services
 
                 String json = JsonConvert.SerializeObject(user);
                 StringContent content =
-                    new StringContent(json, Encoding.UTF8, "application/json");
+                     new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PostAsync(request, content);
             }
         }
@@ -155,8 +133,12 @@ namespace MoneyGo.Services
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
-            
-                String json = JsonConvert.SerializeObject(password);
+
+                byte[] bytes = Encoding.ASCII.GetBytes(password);
+                Usuario user = await this.GetDataUsuario();
+                user.Password = bytes;
+
+                String json = JsonConvert.SerializeObject(user);
                 StringContent content =
                     new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PutAsync(request, content);
@@ -166,7 +148,7 @@ namespace MoneyGo.Services
 
         public async Task<bool> BuscarEmail(String email)
         {
-            String request = "/api/Usuarios/BuscarEmail/"+email;
+            String request = "api/Usuarios/BuscarEmail/"+email;
             bool valido = await this.CallApi<bool>(request);
             return valido;
         }
@@ -181,12 +163,21 @@ namespace MoneyGo.Services
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
 
-                String json = JsonConvert.SerializeObject(imagen);
+                Usuario user = await this.GetDataUsuario();
+                user.ImagenUsuario = imagen;
+                String json = JsonConvert.SerializeObject(user);
                 StringContent content =
                     new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PutAsync(request, content);
             }
 
+        }
+
+        public async Task<Usuario> GetUsuarioEmail(String email)
+        {
+            String request = "/api/Usuarios/GetUsuarioEmail/"+email;
+            Usuario data = await this.CallApi<Usuario>(request);
+            return data;
         }
 
         public string GenerarTokenEmail()

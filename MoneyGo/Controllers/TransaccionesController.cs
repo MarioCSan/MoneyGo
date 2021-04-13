@@ -50,7 +50,7 @@ namespace MoneyGo.Controllers
             String date = DateTime.Now.ToShortTimeString();
             DateTime fecha = Convert.ToDateTime(date);
             int IdUsuario = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            await this.service.NuevaTransaccion(cantidad, tipoTransaccion, Concepto);
+            await this.service.NuevaTransaccion(cantidad, IdUsuario, tipoTransaccion, Concepto);
             ViewData["MSG"] = "Transacción creada";
             return RedirectToAction("Index", "Transacciones");
         }

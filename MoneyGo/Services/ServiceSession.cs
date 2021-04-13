@@ -15,12 +15,12 @@ namespace MoneyGo.Services
             this.httpContext = http;
         }
 
-        public void setSession(String nombre, String token)
+        public void SetTokenSession(String nombre, String token)
         {
             this.httpContext.HttpContext.Session.SetString(nombre, token);
         }
 
-        public String GetSession(String nombre)
+        public String GetTokenSession(String nombre)
         {
             return this.httpContext.HttpContext.Session.GetString(nombre);
         }

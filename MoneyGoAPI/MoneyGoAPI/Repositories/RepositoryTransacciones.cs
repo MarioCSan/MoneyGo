@@ -57,7 +57,7 @@ namespace MoneyGoAPI.Repositories
             return this.context.Transacciones.Where(z => z.IdTransaccion == IdTransaccion).FirstOrDefault();
         }
 
-        public void NuevaTransaccion(int IdUsuario, Double Cantidad, String Tipo, String Concepto, DateTime Fecha)
+        public void NuevaTransaccion(Transacciones transaccion)
         {
             var consulta = from datos in this.context.Transacciones
                            select datos.IdTransaccion;
@@ -67,22 +67,22 @@ namespace MoneyGoAPI.Repositories
 
             Transacciones trnsc = new Transacciones();
             trnsc.IdTransaccion = maxId + 1;
-            trnsc.IdUsuario = IdUsuario;
-            trnsc.Cantidad = Cantidad;
-            trnsc.TipoTransaccion = Tipo;
-            trnsc.Concepto = Concepto;
-            trnsc.FechaTransaccion = Fecha;
+            trnsc.IdUsuario = transaccion.IdUsuario;
+            trnsc.Cantidad = transaccion.Cantidad;
+            trnsc.TipoTransaccion = transaccion.TipoTransaccion;
+            trnsc.Concepto = transaccion.Concepto;
+            trnsc.FechaTransaccion = transaccion.FechaTransaccion;
             this.context.Add(trnsc);
             this.context.SaveChanges();
 
         }
 
-        public void ModificarTransaccion(int idtransaccion, Double cantidad, String tipo, String concepto)
+        public void ModificarTransaccion(Transacciones trnsc)
         {
-            Transacciones transaccion = this.BuscarTransacciones(idtransaccion);
-            transaccion.Cantidad = cantidad;
-            transaccion.TipoTransaccion = tipo;
-            transaccion.Concepto = concepto;
+            Transacciones transaccion = this.BuscarTransacciones(trnsc.IdTransaccion);
+            transaccion.Cantidad = trnsc.Cantidad;
+            transaccion.TipoTransaccion = trnsc.TipoTransaccion;
+            transaccion.Concepto = trnsc.Concepto;
 
             this.context.SaveChanges();
         }
@@ -149,17 +149,9 @@ namespace MoneyGoAPI.Repositories
 
         public Usuarios GetUsuarioEmail(String email)
         {
-            bool emailValido = BuscarEmail(email);
 
-            if (emailValido)
-            {
-                return this.context.Usuarios.SingleOrDefault(x => x.Email == email);
+            return this.context.Usuarios.SingleOrDefault(x => x.Email == email);
 
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public bool BuscarEmailRecuperacion(String email)
@@ -183,7 +175,7 @@ namespace MoneyGoAPI.Repositories
                            select datos.IdUsuario;
 
             int maxId = consulta.Max() + 1;
-           
+
             Usuarios user = new Usuarios();
             user.IdUsuario = maxId;
             user.Nombre = Nombre;

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MoneyGoAPI.Controllers
@@ -76,9 +77,12 @@ namespace MoneyGoAPI.Controllers
         [HttpPut]
         [Route("[action]")]
         [Authorize]
-        public ActionResult<Usuarios> ModificarPassword(String password)
+        public ActionResult<Usuarios> ModificarPassword(Usuarios usr)
         {
             Usuarios usuario = GetUsuario();
+
+            string password = Encoding.ASCII.GetString(usr.Password);
+
             this.repo.CambiarPassword(usuario, password);
             return RedirectToAction("GetTransaccionesUsuario");
         }
@@ -124,6 +128,15 @@ namespace MoneyGoAPI.Controllers
             Usuarios usuario = JsonConvert.DeserializeObject<Usuarios>(jsonusuario);
 
             this.repo.EliminarCuenta(usuario.IdUsuario);
+            return RedirectToAction("Auth", "Index");
+        }
+
+        [HttpGet]
+        [Route("[action]/{email}")]       
+        public ActionResult<Usuarios> GetUsuarioEmail(String email) 
+        {
+
+                this.repo.GetUsuarioEmail(email);
             return RedirectToAction("Auth", "Index");
         }
     }
