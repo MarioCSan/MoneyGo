@@ -46,7 +46,7 @@ namespace MoneyGoAPI
             {
                 options.SwaggerDoc(name: "v1", new OpenApiInfo
                 {
-                    Title = "API CRUD Departamentos Core",
+                    Title = "API Proyecto",
                     Version = "v1",
                     Description = "Open API"
                 });

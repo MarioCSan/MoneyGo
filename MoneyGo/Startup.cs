@@ -37,17 +37,19 @@ namespace MoneyGo
 
             #region services
             services.AddHttpContextAccessor();
-            services.AddTransient<ServiceTransacciones>(st =>
+
+            services.AddTransient<ServiceTransacciones>(x =>
             {
-                var context = st.GetService<IHttpContextAccessor>();
+                var context = x.GetService<IHttpContextAccessor>();
                 return new ServiceTransacciones(urlapi, context);
             });
 
-            services.AddTransient<ServiceUsuario>(st =>
+            services.AddTransient<ServiceUsuario>(x =>
             {
-                var context = st.GetService<IHttpContextAccessor>();
+                var context = x.GetService<IHttpContextAccessor>();
                 return new ServiceUsuario(urlapi, context);
             });
+
             services.AddSingleton<ServiceSession>();
 
             #endregion

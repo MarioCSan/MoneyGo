@@ -82,9 +82,29 @@ namespace MoneyGo.Services
                 }
             }
         }
-
+        private async Task<T> CallApiDelete<T>(String request)
+        {
+            String token = this.http.HttpContext.Session.GetString("token");
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                HttpResponseMessage response = await client.DeleteAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    T data = await response.Content.ReadAsAsync<T>();
+                    return data;
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
         #endregion
-
+        #region crud
         public async Task<Usuario> GetDataUsuario(int idusuario)
         {
             String request = "/api/Usuarios/GetDataUsuario/"+idusuario;
@@ -173,6 +193,12 @@ namespace MoneyGo.Services
 
         }
 
+        public async Task EliminarTransaccion()
+        {
+            String request = "api/Transacciones/Eliminar/";
+            await this.CallApiDelete<Transacciones>(request);
+        }
+#endregion
         public async Task<Usuario> GetUsuarioEmail(String email)
         {
             String request = "/api/Usuarios/GetUsuarioEmail/"+email;

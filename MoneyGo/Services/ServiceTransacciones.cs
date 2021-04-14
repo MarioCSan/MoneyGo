@@ -71,6 +71,8 @@ namespace MoneyGo.Services
             }
         }
 
+        #endregion
+
         public async Task<List<Transacciones>> GetTransacciones()
         {
             String request = "api/Transacciones";
@@ -105,7 +107,6 @@ namespace MoneyGo.Services
 
         }
 
-#endregion
         public async Task<Transacciones> GetDataModificar(int idtransaccion)
         {
             String request = "api/Transacciones/GetTransaccion/" + idtransaccion;
