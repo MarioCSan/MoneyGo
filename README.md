@@ -13,7 +13,7 @@ Después integre la funcionalidad de recuperación y envio de un welcome Pack a 
 Para recuperar la contraseña, tuve que implementar un sistema de tokens que identificaban al usuario.
 Además, en el panel de control de usuario, se integrarón nuevas caracteristicas quepermitian un control total de sua cuenta al usuario.
 
-##Imagenes de la aplicación
+## Imagenes de la aplicación
 
 ![image](https://user-images.githubusercontent.com/40211718/236894860-f7842ae3-d23a-4d3a-b1fa-052d9ee179a2.png)
 ![image](https://user-images.githubusercontent.com/40211718/236895514-3ae08fa9-91d6-43cb-81ce-32ab582aff4c.png)
